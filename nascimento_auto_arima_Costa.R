@@ -101,6 +101,10 @@ PlotTimeSeries<-function(Variable,data, legend=F,tittle=F, ylim=F){
   data2<-data[colnames(data)[sapply(colnames(data),country)!="Cuba"]]
   data2<-data2[colnames(data2)[sapply(colnames(data2),country)!="Costa Rica"]]}
   
+  if (is.null(ylim)==T){
+    maxlim<-max(data2[data2$Mes>"2020-10",][2:ncol(data2)], na.rm = T)+20
+    minlim<-min(data2[data2$Mes>"2020-10",][2:ncol(data2)], na.rm = T)-20
+  }else{
   if (ylim%in%c("country","notCR")){
   maxlim<-max(data2[data2$Mes>"2020-10",][2:ncol(data2)], na.rm = T)+20
   minlim<-min(data2[data2$Mes>"2020-10",][2:ncol(data2)], na.rm = T)-20
@@ -109,7 +113,7 @@ PlotTimeSeries<-function(Variable,data, legend=F,tittle=F, ylim=F){
   minlim<-min(data[data$Mes>"2020-10",][2:ncol(data)], na.rm = T)-20
   }else{
     maxlim<-ylim[2]
-    minlim<-ylim[1]}}
+    minlim<-ylim[1]}}}
   
   #Just in case there is no data available in the selected column
   if (nrow(data[!is.na(data[Variable]),][Variable])==0){return(ggplot() +
