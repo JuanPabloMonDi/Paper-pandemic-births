@@ -13,7 +13,7 @@ library("xlsx")
 library("ggplot2")
 
 ### Import dataset #--------------------
-data= read.csv("nascimentos_auto_arima_maio.csv", sep = ";")
+data= read.csv("Variation_of_births.csv", sep = ";")
 
 
 
@@ -34,7 +34,7 @@ info_variable <- function(variable){
   #2. Now we are going to get the country of the variable. 
   
   #First we create a dictionary to interpret the country codes
-  CountryLetter <- c("B" = "Brasil", "CR" = "Costa Rica", "M" = "Mexico", "CB" = "Cuba", "CH"="Chile")
+  CountryLetter <- c("B" = "Brazil", "CR" = "Costa Rica", "M" = "Mexico", "CB" = "Cuba", "CH"="Chile")
   
   # Get the position (index) of the character that refers to the country in the column name
   InitialCountryPosition <- ifelse(StudyYears == "8", 3,4)
@@ -76,31 +76,37 @@ Age<-function(Variable){
 
 #Here, we a create a function to do an auto ARIMA and plot the result given the column name
 # this is used to reduce the length od the code repeating the same process for different variables
-PlotTimeSeries<-function(Variable,data, legend=F,tittle=F, ylim=F){
+
+
+PlotTimeSeries<-function(Variable,data, legend=F,tittle=F, ylim="notCR"){
 
   #Variable: The name of the column/variable in the data set
+  
   #data: The dataset where the data is going to be obtained
+  
   # legend: plot legend in graph
+  
   # title: plot an automated title generated with the name, age group and years of study 
+  
+  #ylim: a vector of length 2 which values are used to adjust the range on the plot the graph. If NULL, it will only consider the variable in the function.
+  #     If "country" it will consider all time series referring to the same country to adjust ylim on the plot
+  #     If "all" it will consider all the countries in dataset. if "notCR" it wont consider neither Cuba or Costa Rica (this because their variations are very high)
+  
   
   #Select the columns that are for the same country of the Variable
   country_columns<-colnames(data)[sapply(colnames(data),country)%in% country(Variable)]
-  #country_columns=c()
-  #for (column in colnames(data)){
-  #  if (country(column)==country(Variable)){
-  #    country_columns=c(country_columns,column)
-  #  }
-  #}
   
   #Now we will adjust the range of the plot, it depends if it wants to be the same for all the countries or not
-  if (ylim =="country"){
+  if (class(ylim)=="numeric"){maxlim<-ylim[2]
+  minlim<-ylim[1]}else{
+  if (is.null(ylim) == T){
+    data2<-data[c("Mes",Variable)]}else{
+  if (ylim=="country"){
   data2<-data[c("Mes",country_columns)]}
-  if (ylim ==NULL){
-    data2<-data[c("Mes",Variable)]}
   if(ylim =="notCR"){
   data2<-data[colnames(data)[sapply(colnames(data),country)!="Cuba"]]
   data2<-data2[colnames(data2)[sapply(colnames(data2),country)!="Costa Rica"]]}
-  
+    }
   if (is.null(ylim)==T){
     maxlim<-max(data2[data2$Mes>"2020-10",][2:ncol(data2)], na.rm = T)+20
     minlim<-min(data2[data2$Mes>"2020-10",][2:ncol(data2)], na.rm = T)-20
@@ -111,9 +117,7 @@ PlotTimeSeries<-function(Variable,data, legend=F,tittle=F, ylim=F){
   }else{if (ylim=="all"){
   maxlim<-max(data[data$Mes>"2020-10",][2:ncol(data)], na.rm = T)+20
   minlim<-min(data[data$Mes>"2020-10",][2:ncol(data)], na.rm = T)-20
-  }else{
-    maxlim<-ylim[2]
-    minlim<-ylim[1]}}}
+  }}}}
   
   #Just in case there is no data available in the selected column
   if (nrow(data[!is.na(data[Variable]),][Variable])==0){return(ggplot() +
@@ -156,7 +160,7 @@ axis.title.y = element_blank(), # Remove y labs
   ggtitle(titlee)+  #Add title to the graph
   geom_line(data = data.frame(x = c(max(time(prevArima$x)), min(time(prevArima$mean))), y = c(prevArima$x[length(prevArima$x)], prevArima$mean[1])),
             aes(x = x, y = y), color = "blue")+ #Fill the hole between the last observation and the first prediction that is made by the autoplot function
-  labs(x="Year", y="Births",colour="Values",legend.position = "top")+ #Add names for X and Y axis
+  labs(x="Year", y="Variation",colour="Values",legend.position = "top")+ #Add names for X and Y axis
   geom_vline(xintercept=2020.833,color="#a3a3a3",alpha=0.95)+ #Horizontal line to mark the beginning of pandemic
   annotate("text",x = 2021.2, y = maxlim, label = "Pandemic", color = "#a3a3a3",size=2.5,fontface="bold")+  #Add text "Pandemic" to the graph
   scale_color_manual(values=c("blue","red"))#Set colors of the legend
@@ -188,57 +192,64 @@ datainfo$Age<-datainfo$columns%>%lapply(Age)
 datainfo$country<-datainfo$columns%>%lapply(country)
 
 
-### Single time series plots --------------------------------
+### Example: Single time series plots --------------------------------
 
 #Here we do some examples for testing the code, and also
+
 ## X07CR2024 -  Women between 15 and 19 years old with 0 to 7 years of education in Costa Rica
 
-Graph1<-PlotTimeSeries("X07CR1519",data)
+Graph1<-PlotTimeSeries("X07CR1519",data,ylim=NULL)
 
-## X07CR2024 -  Women between 20 and 24 years old with 0 to 7 years of education in Costa Rica
+## X07CR2024 -  Women between 20 and 24 years old with 0 to 7 years of education in Mexico
 
-Graph2<-PlotTimeSeries("X07CR2024",data)
+Graph2<-PlotTimeSeries("X07M2024",data, ylim="country")
 
-## X12CR2024 - mulheres de mais de 12 anos de Education_level entre 20 a 24 anos
+## X12CR2024 - Women between 30 and 39 years old with more than 12 years of education in Brazil
 
-Graph3<-PlotTimeSeries("X07CR2529",data)
-Graph4<-PlotTimeSeries("X07CR3034",data)
-Graph5<-PlotTimeSeries("X07CR3539",data)
-Graph6<-PlotTimeSeries("X07CR40",data)
+Graph3<-PlotTimeSeries("X12B3039",data, ylim="all")
+
+## X12CR2024 - Women between 25 and 29 years old with 8 to 11 years of education in Chile
+
+Graph4<-PlotTimeSeries("X8CH2529",data, ylim=c(-100,100))
 
 
-# Create row and column titles
-col.titles = unlist(unique(datainfo$Age))
-row.titles = unlist(unique(datainfo$Education_level))
+### Grid of variations by country ------------------------
 
-legenda<-get_only_legend(PlotTimeSeries("X12B40",data,legend = T))
-#Agora, vamos a grilha dos Graphs, tenho certeza que isto pode ser mais simples mais nao sei como, tal vez um for
+#Finally, we will made a grid by age group and years of study for each country. These graphs are the one that are showed in the paper
+
+#First, we generate the legend for the grid
+legend<-get_only_legend(PlotTimeSeries("X12B40",data,legend = T))
+
+
+
+#grid for Costa Rica
 grid1<-grid.arrange(
-  arrangeGrob(PlotTimeSeries("X07CR1519",data), top=Age("X07CR1519"), left=study_years("X07CR1519")),
-  arrangeGrob(PlotTimeSeries("X07CR2024",data), top=Age("X07CR2024")),
-  arrangeGrob(PlotTimeSeries("X07CR2529",data), top=Age("X07CR2529")),
-  arrangeGrob(PlotTimeSeries("X07CR3034",data), top=Age("X07CR3034")),
-  arrangeGrob(PlotTimeSeries("X07CR3539",data), top=Age("X07CR3539")),
-  arrangeGrob(PlotTimeSeries("X07CR40",data), top="40+"),
-  arrangeGrob(PlotTimeSeries("X8CR1519",data), left=study_years("X8CR1519")),
-  arrangeGrob(PlotTimeSeries("X8CR2024",data)),
-  arrangeGrob(PlotTimeSeries("X8CR2529",data)),
-  arrangeGrob(PlotTimeSeries("X8CR3034",data)),
-  arrangeGrob(PlotTimeSeries("X8CR3539",data)),
-  arrangeGrob(PlotTimeSeries("X8CR40",data)),
-  arrangeGrob(PlotTimeSeries("X12CR1519",data), left=study_years("X12CR1519")),
-  arrangeGrob(PlotTimeSeries("X12CR2024",data)),
-  arrangeGrob(PlotTimeSeries("X12CR2529",data)),
-  arrangeGrob(PlotTimeSeries("X12CR3034",data)),
-  arrangeGrob(PlotTimeSeries("X12CR3539",data)),
-  arrangeGrob(PlotTimeSeries("X12CR40",data)),
+  arrangeGrob(PlotTimeSeries("X07CR1519",data,ylim = "country"), top=Age("X07CR1519"), left=study_years("X07CR1519")),
+  arrangeGrob(PlotTimeSeries("X07CR2024",data,ylim = "country"), top=Age("X07CR2024")),
+  arrangeGrob(PlotTimeSeries("X07CR2529",data,ylim = "country"), top=Age("X07CR2529")),
+  arrangeGrob(PlotTimeSeries("X07CR3034",data,ylim = "country"), top=Age("X07CR3034")),
+  arrangeGrob(PlotTimeSeries("X07CR3539",data,ylim = "country"), top=Age("X07CR3539")),
+  arrangeGrob(PlotTimeSeries("X07CR40",data,ylim = "country"), top="40+"),
+  arrangeGrob(PlotTimeSeries("X8CR1519",data,ylim = "country"), left=study_years("X8CR1519")),
+  arrangeGrob(PlotTimeSeries("X8CR2024",data,ylim = "country")),
+  arrangeGrob(PlotTimeSeries("X8CR2529",data,ylim = "country")),
+  arrangeGrob(PlotTimeSeries("X8CR3034",data,ylim = "country")),
+  arrangeGrob(PlotTimeSeries("X8CR3539",data,ylim = "country")),
+  arrangeGrob(PlotTimeSeries("X8CR40",data,ylim = "country")),
+  arrangeGrob(PlotTimeSeries("X12CR1519",data,ylim = "country"), left=study_years("X12CR1519")),
+  arrangeGrob(PlotTimeSeries("X12CR2024",data,ylim = "country")),
+  arrangeGrob(PlotTimeSeries("X12CR2529",data,ylim = "country")),
+  arrangeGrob(PlotTimeSeries("X12CR3034",data,ylim = "country")),
+  arrangeGrob(PlotTimeSeries("X12CR3539",data,ylim = "country")),
+  arrangeGrob(PlotTimeSeries("X12CR40",data,ylim = "country")),
   ncol=6,
   top = textGrob("Costa Rica \n Age (years)",gp=gpar(fontsize=15,font=2)),
   left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90)
  )
-grid2<-grid.arrange(grid1,legenda,ncol=1, heights=c(10,1))
+grid2<-grid.arrange(grid1,legend,ncol=1, heights=c(10,1))
 
-#Agora, vamos a grilha dos Graphs, tenho certeza que isto pode ser mais simples mais nao sei como, tal vez um for
+# Grid for Brazil
+
 grid3<-grid.arrange(
   arrangeGrob(PlotTimeSeries("X07B1519",data), top=Age("X07B1519"), left=study_years("X07CR1519")),
   arrangeGrob(PlotTimeSeries("X07B2024",data), top=Age("X07B2024")),
@@ -259,12 +270,12 @@ grid3<-grid.arrange(
   arrangeGrob(PlotTimeSeries("X12B3539",data)),
   arrangeGrob(PlotTimeSeries("X12B40",data)),
   ncol=6,
-  top = textGrob("Brasil \n Age (years)",gp=gpar(fontsize=15,font=2)),
+  top = textGrob("Brazil \n Age (years)",gp=gpar(fontsize=15,font=2)),
   left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90)
 )
-grid4<-grid.arrange(grid3,legenda,ncol=1, heights=c(10,1))
+grid4<-grid.arrange(grid3,legend,ncol=1, heights=c(10,1))
 
-
+#Grid for Cuba
 grid5<-grid.arrange(
   arrangeGrob(PlotTimeSeries("X07CB1519",data), top=Age("X07CB1519"), left=study_years("X07CB1519")),
   arrangeGrob(PlotTimeSeries("X07CB2024",data), top=Age("X07CB2024")),
@@ -288,7 +299,9 @@ grid5<-grid.arrange(
   top = textGrob("Cuba \n Age (years)",gp=gpar(fontsize=15,font=2)),
   left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90)
 )
-grid6<-grid.arrange(grid5,legenda,ncol=1, heights=c(10,1))
+grid6<-grid.arrange(grid5,legend,ncol=1, heights=c(10,1))
+
+#Grid for Mexico
 
 grid7<-grid.arrange(
   arrangeGrob(PlotTimeSeries("X07M1519",data), top=Age("X07M1519"), left=study_years("X07M1519")),
@@ -313,8 +326,10 @@ grid7<-grid.arrange(
   top = textGrob("Mexico \n Age (years)",gp=gpar(fontsize=15,font=2)),
   left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90)
 )
-grid8<-grid.arrange(grid7,legenda,ncol=1, heights=c(10,1))
+grid8<-grid.arrange(grid7,legend,ncol=1, heights=c(10,1))
 
+
+#Grid for Chile
 
 grid9<-grid.arrange(
   arrangeGrob(PlotTimeSeries("X07CH1519",data), top=Age("X07CH1519"), left=study_years("X07CH1519")),
@@ -339,4 +354,4 @@ grid9<-grid.arrange(
   top = textGrob("Chile \n Age (years)",gp=gpar(fontsize=15,font=2)),
   left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90)
 )
-grid10<-grid.arrange(grid9,legenda,ncol=1, heights=c(10,1))
+grid10<-grid.arrange(grid9,legend,ncol=1, heights=c(10,1))
