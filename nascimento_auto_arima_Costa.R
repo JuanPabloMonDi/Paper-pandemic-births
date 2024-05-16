@@ -71,11 +71,6 @@ Age<-function(Variable){
 }
 
 
-Variable<-"X07CB40"
-
-
-
-
 
 ### Create function to plot time series ----------------------------
 
@@ -100,6 +95,8 @@ PlotTimeSeries<-function(Variable,data, legend=F,tittle=F, ylim=F){
   #Now we will adjust the range of the plot, it depends if it wants to be the same for all the countries or not
   if (ylim =="country"){
   data2<-data[c("Mes",country_columns)]}
+  if (ylim ==NULL){
+    data2<-data[c("Mes",Variable)]}
   if(ylim =="notCR"){
   data2<-data[colnames(data)[sapply(colnames(data),country)!="Cuba"]]
   data2<-data2[colnames(data2)[sapply(colnames(data2),country)!="Costa Rica"]]}
@@ -108,8 +105,8 @@ PlotTimeSeries<-function(Variable,data, legend=F,tittle=F, ylim=F){
   maxlim<-max(data2[data2$Mes>"2020-10",][2:ncol(data2)], na.rm = T)+20
   minlim<-min(data2[data2$Mes>"2020-10",][2:ncol(data2)], na.rm = T)-20
   }else{if (ylim=="all"){
-  maxlim<-max(data[data$Mes>"2020-10",][2:ncol(data)], na.rm = T)
-  minlim<-min(data[data$Mes>"2020-10",][2:ncol(data)], na.rm = T)
+  maxlim<-max(data[data$Mes>"2020-10",][2:ncol(data)], na.rm = T)+20
+  minlim<-min(data[data$Mes>"2020-10",][2:ncol(data)], na.rm = T)-20
   }else{
     maxlim<-ylim[2]
     minlim<-ylim[1]}}
@@ -188,11 +185,13 @@ datainfo$country<-datainfo$columns%>%lapply(country)
 
 
 ### Single time series plots --------------------------------
-## X07CR2024 - mulheres de 0 a 7 anos de Education_level entre 15 a 19 anos
+
+#Here we do some examples for testing the code, and also
+## X07CR2024 -  Women between 15 and 19 years old with 0 to 7 years of education in Costa Rica
 
 Graph1<-PlotTimeSeries("X07CR1519",data)
 
-## X07CR2024 - mulheres de 0 a 7 anos de Education_level entre 20 a 24 anos
+## X07CR2024 -  Women between 20 and 24 years old with 0 to 7 years of education in Costa Rica
 
 Graph2<-PlotTimeSeries("X07CR2024",data)
 
