@@ -1,0 +1,219 @@
+Source: Wittgenstein Centre for Demography and Global Human Capital (2023). Wittgenstein Centre Data Explorer Version 3.0
+Available at: www.wittgensteincentre.org/dataexplorer 
+
+""
+"Age-Specific Fertility Rate by Education"
+"Number of births occurring to women in a particular age group by level of education attainment during a five-year period divided by the number of women in that age group. Available in all scenarios, and at all geographical scales. It is expressed in births per 1,000 women."
+"Medium (SSP2)"
+" "
+"Area","Period","Age","Education","Rate"
+"Brazil","2020-2025","15--19","No Education",80.2
+"Chile","2020-2025","15--19","No Education",64.7
+"Costa Rica","2020-2025","15--19","No Education",67.8
+"Cuba","2020-2025","15--19","No Education",83.1
+"Mexico","2020-2025","15--19","No Education",83.8
+"Brazil","2020-2025","20--24","No Education",115.5
+"Chile","2020-2025","20--24","No Education",95.4
+"Costa Rica","2020-2025","20--24","No Education",114.2
+"Cuba","2020-2025","20--24","No Education",161.1
+"Mexico","2020-2025","20--24","No Education",152.5
+"Brazil","2020-2025","25--29","No Education",103.7
+"Chile","2020-2025","25--29","No Education",110.1
+"Costa Rica","2020-2025","25--29","No Education",99.6
+"Cuba","2020-2025","25--29","No Education",143.1
+"Mexico","2020-2025","25--29","No Education",150.8
+"Brazil","2020-2025","30--34","No Education",77.8
+"Chile","2020-2025","30--34","No Education",107.5
+"Costa Rica","2020-2025","30--34","No Education",78.2
+"Cuba","2020-2025","30--34","No Education",89.8
+"Mexico","2020-2025","30--34","No Education",99.2
+"Brazil","2020-2025","35--39","No Education",41.5
+"Chile","2020-2025","35--39","No Education",60.4
+"Costa Rica","2020-2025","35--39","No Education",43.2
+"Cuba","2020-2025","35--39","No Education",37.8
+"Mexico","2020-2025","35--39","No Education",55.5
+"Brazil","2020-2025","40--44","No Education",11.7
+"Chile","2020-2025","40--44","No Education",15.8
+"Costa Rica","2020-2025","40--44","No Education",11.8
+"Cuba","2020-2025","40--44","No Education",7.3
+"Mexico","2020-2025","40--44","No Education",12.1
+"Brazil","2020-2025","45--49","No Education",1
+"Chile","2020-2025","45--49","No Education",0.8
+"Costa Rica","2020-2025","45--49","No Education",0.9
+"Cuba","2020-2025","45--49","No Education",0.4
+"Mexico","2020-2025","45--49","No Education",2.6
+"Brazil","2020-2025","15--19","Incomplete Primary",80.2
+"Chile","2020-2025","15--19","Incomplete Primary",64.7
+"Costa Rica","2020-2025","15--19","Incomplete Primary",67.8
+"Cuba","2020-2025","15--19","Incomplete Primary",83.1
+"Mexico","2020-2025","15--19","Incomplete Primary",83.8
+"Brazil","2020-2025","20--24","Incomplete Primary",115.5
+"Chile","2020-2025","20--24","Incomplete Primary",95.4
+"Costa Rica","2020-2025","20--24","Incomplete Primary",114.2
+"Cuba","2020-2025","20--24","Incomplete Primary",161.1
+"Mexico","2020-2025","20--24","Incomplete Primary",152.5
+"Brazil","2020-2025","25--29","Incomplete Primary",103.7
+"Chile","2020-2025","25--29","Incomplete Primary",110.1
+"Costa Rica","2020-2025","25--29","Incomplete Primary",99.6
+"Cuba","2020-2025","25--29","Incomplete Primary",143.1
+"Mexico","2020-2025","25--29","Incomplete Primary",150.8
+"Brazil","2020-2025","30--34","Incomplete Primary",77.8
+"Chile","2020-2025","30--34","Incomplete Primary",107.5
+"Costa Rica","2020-2025","30--34","Incomplete Primary",78.2
+"Cuba","2020-2025","30--34","Incomplete Primary",89.8
+"Mexico","2020-2025","30--34","Incomplete Primary",99.2
+"Brazil","2020-2025","35--39","Incomplete Primary",41.5
+"Chile","2020-2025","35--39","Incomplete Primary",60.4
+"Costa Rica","2020-2025","35--39","Incomplete Primary",43.2
+"Cuba","2020-2025","35--39","Incomplete Primary",37.8
+"Mexico","2020-2025","35--39","Incomplete Primary",55.5
+"Brazil","2020-2025","40--44","Incomplete Primary",11.7
+"Chile","2020-2025","40--44","Incomplete Primary",15.8
+"Costa Rica","2020-2025","40--44","Incomplete Primary",11.8
+"Cuba","2020-2025","40--44","Incomplete Primary",7.3
+"Mexico","2020-2025","40--44","Incomplete Primary",12.1
+"Brazil","2020-2025","45--49","Incomplete Primary",1
+"Chile","2020-2025","45--49","Incomplete Primary",0.8
+"Costa Rica","2020-2025","45--49","Incomplete Primary",0.9
+"Cuba","2020-2025","45--49","Incomplete Primary",0.4
+"Mexico","2020-2025","45--49","Incomplete Primary",2.6
+"Brazil","2020-2025","15--19","Primary",80.2
+"Chile","2020-2025","15--19","Primary",64.7
+"Costa Rica","2020-2025","15--19","Primary",67.8
+"Cuba","2020-2025","15--19","Primary",83.1
+"Mexico","2020-2025","15--19","Primary",83.8
+"Brazil","2020-2025","20--24","Primary",115.5
+"Chile","2020-2025","20--24","Primary",95.4
+"Costa Rica","2020-2025","20--24","Primary",114.2
+"Cuba","2020-2025","20--24","Primary",161.1
+"Mexico","2020-2025","20--24","Primary",152.5
+"Brazil","2020-2025","25--29","Primary",103.7
+"Chile","2020-2025","25--29","Primary",110.1
+"Costa Rica","2020-2025","25--29","Primary",99.6
+"Cuba","2020-2025","25--29","Primary",143.1
+"Mexico","2020-2025","25--29","Primary",150.8
+"Brazil","2020-2025","30--34","Primary",77.8
+"Chile","2020-2025","30--34","Primary",107.5
+"Costa Rica","2020-2025","30--34","Primary",78.2
+"Cuba","2020-2025","30--34","Primary",89.8
+"Mexico","2020-2025","30--34","Primary",99.2
+"Brazil","2020-2025","35--39","Primary",41.5
+"Chile","2020-2025","35--39","Primary",60.4
+"Costa Rica","2020-2025","35--39","Primary",43.2
+"Cuba","2020-2025","35--39","Primary",37.8
+"Mexico","2020-2025","35--39","Primary",55.5
+"Brazil","2020-2025","40--44","Primary",11.7
+"Chile","2020-2025","40--44","Primary",15.8
+"Costa Rica","2020-2025","40--44","Primary",11.8
+"Cuba","2020-2025","40--44","Primary",7.3
+"Mexico","2020-2025","40--44","Primary",12.1
+"Brazil","2020-2025","45--49","Primary",1
+"Chile","2020-2025","45--49","Primary",0.8
+"Costa Rica","2020-2025","45--49","Primary",0.9
+"Cuba","2020-2025","45--49","Primary",0.4
+"Mexico","2020-2025","45--49","Primary",2.6
+"Brazil","2020-2025","15--19","Lower Secondary",57.6
+"Chile","2020-2025","15--19","Lower Secondary",48.8
+"Costa Rica","2020-2025","15--19","Lower Secondary",49.7
+"Cuba","2020-2025","15--19","Lower Secondary",65.8
+"Mexico","2020-2025","15--19","Lower Secondary",64.5
+"Brazil","2020-2025","20--24","Lower Secondary",84.6
+"Chile","2020-2025","20--24","Lower Secondary",73
+"Costa Rica","2020-2025","20--24","Lower Secondary",88.3
+"Cuba","2020-2025","20--24","Lower Secondary",127.6
+"Mexico","2020-2025","20--24","Lower Secondary",123.2
+"Brazil","2020-2025","25--29","Lower Secondary",81
+"Chile","2020-2025","25--29","Lower Secondary",85.1
+"Costa Rica","2020-2025","25--29","Lower Secondary",78.2
+"Cuba","2020-2025","25--29","Lower Secondary",113.3
+"Mexico","2020-2025","25--29","Lower Secondary",122.8
+"Brazil","2020-2025","30--34","Lower Secondary",68.6
+"Chile","2020-2025","30--34","Lower Secondary",86.2
+"Costa Rica","2020-2025","30--34","Lower Secondary",65.5
+"Cuba","2020-2025","30--34","Lower Secondary",71.3
+"Mexico","2020-2025","30--34","Lower Secondary",78.8
+"Brazil","2020-2025","35--39","Lower Secondary",39.1
+"Chile","2020-2025","35--39","Lower Secondary",53.4
+"Costa Rica","2020-2025","35--39","Lower Secondary",37.8
+"Cuba","2020-2025","35--39","Lower Secondary",30
+"Mexico","2020-2025","35--39","Lower Secondary",41.4
+"Brazil","2020-2025","40--44","Lower Secondary",10.4
+"Chile","2020-2025","40--44","Lower Secondary",13.3
+"Costa Rica","2020-2025","40--44","Lower Secondary",9.4
+"Cuba","2020-2025","40--44","Lower Secondary",5.8
+"Mexico","2020-2025","40--44","Lower Secondary",8.6
+"Brazil","2020-2025","45--49","Lower Secondary",0.8
+"Chile","2020-2025","45--49","Lower Secondary",0.6
+"Costa Rica","2020-2025","45--49","Lower Secondary",0.6
+"Cuba","2020-2025","45--49","Lower Secondary",0.3
+"Mexico","2020-2025","45--49","Lower Secondary",1.7
+"Brazil","2020-2025","15--19","Upper Secondary",38.8
+"Chile","2020-2025","15--19","Upper Secondary",28.8
+"Costa Rica","2020-2025","15--19","Upper Secondary",35.2
+"Cuba","2020-2025","15--19","Upper Secondary",52.6
+"Mexico","2020-2025","15--19","Upper Secondary",45.7
+"Brazil","2020-2025","20--24","Upper Secondary",58.9
+"Chile","2020-2025","20--24","Upper Secondary",46.8
+"Costa Rica","2020-2025","20--24","Upper Secondary",65.9
+"Cuba","2020-2025","20--24","Upper Secondary",89
+"Mexico","2020-2025","20--24","Upper Secondary",93.6
+"Brazil","2020-2025","25--29","Upper Secondary",60.7
+"Chile","2020-2025","25--29","Upper Secondary",56.9
+"Costa Rica","2020-2025","25--29","Upper Secondary",58.6
+"Cuba","2020-2025","25--29","Upper Secondary",84.8
+"Mexico","2020-2025","25--29","Upper Secondary",96.1
+"Brazil","2020-2025","30--34","Upper Secondary",57.6
+"Chile","2020-2025","30--34","Upper Secondary",68.2
+"Costa Rica","2020-2025","30--34","Upper Secondary",51.5
+"Cuba","2020-2025","30--34","Upper Secondary",55.3
+"Mexico","2020-2025","30--34","Upper Secondary",61.1
+"Brazil","2020-2025","35--39","Upper Secondary",34.2
+"Chile","2020-2025","35--39","Upper Secondary",59.3
+"Costa Rica","2020-2025","35--39","Upper Secondary",31
+"Cuba","2020-2025","35--39","Upper Secondary",26.2
+"Mexico","2020-2025","35--39","Upper Secondary",30.4
+"Brazil","2020-2025","40--44","Upper Secondary",8.5
+"Chile","2020-2025","40--44","Upper Secondary",12.8
+"Costa Rica","2020-2025","40--44","Upper Secondary",7.2
+"Cuba","2020-2025","40--44","Upper Secondary",5.6
+"Mexico","2020-2025","40--44","Upper Secondary",6.2
+"Brazil","2020-2025","45--49","Upper Secondary",0.5
+"Chile","2020-2025","45--49","Upper Secondary",0.4
+"Costa Rica","2020-2025","45--49","Upper Secondary",0.3
+"Cuba","2020-2025","45--49","Upper Secondary",0.5
+"Mexico","2020-2025","45--49","Upper Secondary",1.1
+"Brazil","2020-2025","15--19","Post Secondary",32.8
+"Chile","2020-2025","15--19","Post Secondary",24.2
+"Costa Rica","2020-2025","15--19","Post Secondary",29.6
+"Cuba","2020-2025","15--19","Post Secondary",44.9
+"Mexico","2020-2025","15--19","Post Secondary",38.3
+"Brazil","2020-2025","20--24","Post Secondary",49.8
+"Chile","2020-2025","20--24","Post Secondary",39.5
+"Costa Rica","2020-2025","20--24","Post Secondary",55.5
+"Cuba","2020-2025","20--24","Post Secondary",76.6
+"Mexico","2020-2025","20--24","Post Secondary",78.8
+"Brazil","2020-2025","25--29","Post Secondary",51.4
+"Chile","2020-2025","25--29","Post Secondary",48.3
+"Costa Rica","2020-2025","25--29","Post Secondary",49.6
+"Cuba","2020-2025","25--29","Post Secondary",71.5
+"Mexico","2020-2025","25--29","Post Secondary",81.5
+"Brazil","2020-2025","30--34","Post Secondary",48.8
+"Chile","2020-2025","30--34","Post Secondary",57.9
+"Costa Rica","2020-2025","30--34","Post Secondary",43.8
+"Cuba","2020-2025","30--34","Post Secondary",46.3
+"Mexico","2020-2025","30--34","Post Secondary",52.1
+"Brazil","2020-2025","35--39","Post Secondary",29
+"Chile","2020-2025","35--39","Post Secondary",50.1
+"Costa Rica","2020-2025","35--39","Post Secondary",26.3
+"Cuba","2020-2025","35--39","Post Secondary",21.5
+"Mexico","2020-2025","35--39","Post Secondary",26
+"Brazil","2020-2025","40--44","Post Secondary",7.2
+"Chile","2020-2025","40--44","Post Secondary",10.8
+"Costa Rica","2020-2025","40--44","Post Secondary",6.1
+"Cuba","2020-2025","40--44","Post Secondary",4.6
+"Mexico","2020-2025","40--44","Post Secondary",5.3
+"Brazil","2020-2025","45--49","Post Secondary",0.5
+"Chile","2020-2025","45--49","Post Secondary",0.3
+"Costa Rica","2020-2025","45--49","Post Secondary",0.3
+"Cuba","2020-2025","45--49","Post Secondary",0.4
+"Mexico","2020-2025","45--49","Post Secondary",1

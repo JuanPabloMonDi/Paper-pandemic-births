@@ -5,6 +5,7 @@ graphics.off( )
 library(seasonal)
 library(openxlsx)
 library(zoo)
+library(scales)
 library(ggpubr)
 library(grid)
 library(gridExtra)
@@ -14,7 +15,7 @@ library("ggplot2")
 
 ### Import dataset #--------------------
 data= read.csv("Variation_of_births.csv", sep = ";")
-
+data$Mes<-as.yearmon(data$Mes)
 
 
 ### Obtain the information of the variable -------------------------
@@ -78,7 +79,7 @@ Age<-function(Variable){
 # this is used to reduce the length od the code repeating the same process for different variables
 
 
-PlotTimeSeries<-function(Variable,data, legend=F,tittle=F, ylim="notCR"){
+PlotTimeSeries<-function(Variable,data, legend=F,tittle=F, ylim=c(-80,80)){
 
   #Variable: The name of the column/variable in the data set
   
@@ -108,15 +109,15 @@ PlotTimeSeries<-function(Variable,data, legend=F,tittle=F, ylim="notCR"){
   data2<-data2[colnames(data2)[sapply(colnames(data2),country)!="Costa Rica"]]}
     }
   if (is.null(ylim)==T){
-    maxlim<-max(data2[data2$Mes>"2020-10",][2:ncol(data2)], na.rm = T)+20
-    minlim<-min(data2[data2$Mes>"2020-10",][2:ncol(data2)], na.rm = T)-20
+    maxlim<-max(data2[data2$Mes>"Out 2020",][2:ncol(data2)], na.rm = T)+20
+    minlim<-min(data2[data2$Mes>"Out 2020",][2:ncol(data2)], na.rm = T)-20
   }else{
   if (ylim%in%c("country","notCR")){
-  maxlim<-max(data2[data2$Mes>"2020-10",][2:ncol(data2)], na.rm = T)+20
-  minlim<-min(data2[data2$Mes>"2020-10",][2:ncol(data2)], na.rm = T)-20
+  maxlim<-max(data2[data2$Mes>"Out 2020",][2:ncol(data2)], na.rm = T)+20
+  minlim<-min(data2[data2$Mes>"Out 2020",][2:ncol(data2)], na.rm = T)-20
   }else{if (ylim=="all"){
-  maxlim<-max(data[data$Mes>"2020-10",][2:ncol(data)], na.rm = T)+20
-  minlim<-min(data[data$Mes>"2020-10",][2:ncol(data)], na.rm = T)-20
+  maxlim<-max(data[data$Mes>"Out 2020",][2:ncol(data)], na.rm = T)+20
+  minlim<-min(data[data$Mes>"Out 2020",][2:ncol(data)], na.rm = T)-20
   }}}}
   
   #Just in case there is no data available in the selected column
@@ -133,7 +134,7 @@ data_ts = ts(data[Variable], start = c(2012,1), end = c(2022,12), frequency = 12
 tedata = window(data_ts, start=c(2020,11), end=c(2022,12))
 
 ModArima = auto.arima(train_data, trace = T, stepwise = F, approximation = F)
-prevArima=forecast(ModArima, h=36)
+prevArima=forecast(ModArima, h=36, level = 95) #The parameter "level" establish the confidence intervals. It can be a vector to plot multiple intervals
 accuracy(prevArima)
 
 #If true, we add the title and legend to the plot
@@ -145,25 +146,48 @@ if (legend==T){
   legend_position="bottom"
 }else{legend_position="none"}
 
-Graph<-autoplot(prevArima,color="blue",series="Forecast") + #plot time series
+line<-data.frame(x1=2020.85,x2=2021.375,y1=maxlim-20,y2=maxlim-20)
+
+#Now, we will plot the time series, most of the parameters are just for aesthetic purposes.
+#A simpler code could be plot(PrevArima)
+
+Graph<-autoplot(prevArima,color="blue",series="Forecast", PI=F) + #plot time series
+  #Settings for confidence interval
+  geom_ribbon(aes( x=seq(2020.833, by = 0.0833333, length.out = 36),
+                  ymin = lower, ymax = upper),
+              data =data.frame(lower=as.numeric(prevArima$lower[,1]),upper=as.numeric(prevArima$upper[,1]))  ,
+              fill = "black",
+              alpha = 0.1,
+              color="black",
+              linetype="dotted")+
   autolayer(tedata,series="Observed",colour = T)+ #plot observed data
-  autolayer(prevArima$mean,series="Forecast",colour=T)+ #plot predicted data
-  xlim(c(2020.8,2022.5))+ #Horizontal limits
+  autolayer(prevArima$mean,series="Forecasted",colour=T)+ #plot predicted data
+  scale_x_continuous(labels = function(x) format(as.yearmon(x, origin = "2012-10-01"), "%b-%Y"))+ #Set the x-axis to date format
+  coord_cartesian(xlim = as.yearmon(c("2020-10", "2022-12")))+  #Horizontal limits in date format 
   ylim(c(min(minlim,-maxlim)),max(-minlim,maxlim))+ #Range of plot
   theme(plot.title = element_text(size=10), #Title size
         legend.position = legend_position, #Legend position
         axis.title.x=element_blank(), #Remove x axis lab
-        axis.text.x=element_text(angle = 45, vjust = 0.5, hjust=1,size = 5), #Modify x axis values
+        axis.text.x=element_text(angle = 0, vjust = 0.5, hjust=1,size = 8), #Modify x axis values
         axis.ticks.y = element_blank(),  # Remove y axis values
-axis.title.y = element_blank(), # Remove y labs
+        axis.title.y = element_blank(), # Remove y labs
         axis.ticks.x=element_blank())+ # Remove x ticks
   ggtitle(titlee)+  #Add title to the graph
   geom_line(data = data.frame(x = c(max(time(prevArima$x)), min(time(prevArima$mean))), y = c(prevArima$x[length(prevArima$x)], prevArima$mean[1])),
             aes(x = x, y = y), color = "blue")+ #Fill the hole between the last observation and the first prediction that is made by the autoplot function
-  labs(x="Year", y="Variation",colour="Values",legend.position = "top")+ #Add names for X and Y axis
+  labs(x="Births in months", y="Variation",colour="Birth counts",legend.position = "top")+ #Add names for X and Y axis
   geom_vline(xintercept=2020.833,color="#a3a3a3",alpha=0.95)+ #Horizontal line to mark the beginning of pandemic
-  annotate("text",x = 2021.2, y = maxlim, label = "Pandemic", color = "#a3a3a3",size=2.5,fontface="bold")+  #Add text "Pandemic" to the graph
-  scale_color_manual(values=c("blue","red"))#Set colors of the legend
+  annotate("text",x = 2021.1, y = maxlim-10, label = "Pandemic", color = "#a3a3a3",size=5,fontface="bold")+  #Add text "Pandemic" to the graph
+  #Draw the arrow below the "pandemic" text
+  geom_segment(aes(x = x1, xend = x2,
+               y = y1, yend = y2),data = line, 
+               color = "#a3a3a3",linewidth =1.25,
+               arrow = arrow(length = unit(0.125,"inch")),
+               lineend = "round",
+               linejoin = "round"
+               )+
+  scale_color_manual(values=c("blue","red"))+#Set colors of the legend
+  theme_bw() #set_theme
  return(Graph)}
 }
 
@@ -196,21 +220,28 @@ datainfo$country<-datainfo$columns%>%lapply(country)
 
 #Here we do some examples for testing the code, and also
 
-## X07CR2024 -  Women between 15 and 19 years old with 0 to 7 years of education in Costa Rica
+## X07CR1519 -  Women between 15 and 19 years old with 0 to 7 years of education in Costa Rica
 
 Graph1<-PlotTimeSeries("X07CR1519",data,ylim=NULL)
 
-## X07CR2024 -  Women between 20 and 24 years old with 0 to 7 years of education in Mexico
+## X07M2024 -  Women between 20 and 24 years old with 0 to 7 years of education in Mexico
 
 Graph2<-PlotTimeSeries("X07M2024",data, ylim="country")
 
-## X12CR2024 - Women between 30 and 39 years old with more than 12 years of education in Brazil
+## X12B3039 - Women between 35 and 39 years old with more than 12 years of education in Brazil
 
-Graph3<-PlotTimeSeries("X12B3039",data, ylim="all")
+Graph3<-PlotTimeSeries("X12B5039",data, ylim="all")
 
-## X12CR2024 - Women between 25 and 29 years old with 8 to 11 years of education in Chile
+## X8CH2529 - Women between 25 and 29 years old with 8 to 11 years of education in Chile
 
 Graph4<-PlotTimeSeries("X8CH2529",data, ylim=c(-100,100))
+
+## X12CR1519 - Women between 15 and 19 years old with at least 12 years of education in Costa Rica
+Graph5<-PlotTimeSeries("X12CR1519",data, ylim=c(-105,100))
+
+## X12B1519 - Women between 15 and 19 years old with at least 12 years of education in Costa Rica
+Graph6<-PlotTimeSeries("X12B1519",data)
+
 
 
 ### Grid of variations by country ------------------------
@@ -224,27 +255,28 @@ legend<-get_only_legend(PlotTimeSeries("X12B40",data,legend = T))
 
 #grid for Costa Rica
 grid1<-grid.arrange(
-  arrangeGrob(PlotTimeSeries("X07CR1519",data,ylim = "country"), top=Age("X07CR1519"), left=study_years("X07CR1519")),
-  arrangeGrob(PlotTimeSeries("X07CR2024",data,ylim = "country"), top=Age("X07CR2024")),
-  arrangeGrob(PlotTimeSeries("X07CR2529",data,ylim = "country"), top=Age("X07CR2529")),
-  arrangeGrob(PlotTimeSeries("X07CR3034",data,ylim = "country"), top=Age("X07CR3034")),
-  arrangeGrob(PlotTimeSeries("X07CR3539",data,ylim = "country"), top=Age("X07CR3539")),
-  arrangeGrob(PlotTimeSeries("X07CR40",data,ylim = "country"), top="40+"),
-  arrangeGrob(PlotTimeSeries("X8CR1519",data,ylim = "country"), left=study_years("X8CR1519")),
-  arrangeGrob(PlotTimeSeries("X8CR2024",data,ylim = "country")),
-  arrangeGrob(PlotTimeSeries("X8CR2529",data,ylim = "country")),
-  arrangeGrob(PlotTimeSeries("X8CR3034",data,ylim = "country")),
-  arrangeGrob(PlotTimeSeries("X8CR3539",data,ylim = "country")),
-  arrangeGrob(PlotTimeSeries("X8CR40",data,ylim = "country")),
-  arrangeGrob(PlotTimeSeries("X12CR1519",data,ylim = "country"), left=study_years("X12CR1519")),
-  arrangeGrob(PlotTimeSeries("X12CR2024",data,ylim = "country")),
-  arrangeGrob(PlotTimeSeries("X12CR2529",data,ylim = "country")),
-  arrangeGrob(PlotTimeSeries("X12CR3034",data,ylim = "country")),
-  arrangeGrob(PlotTimeSeries("X12CR3539",data,ylim = "country")),
-  arrangeGrob(PlotTimeSeries("X12CR40",data,ylim = "country")),
+  arrangeGrob(PlotTimeSeries("X07CR1519",data,ylim = c(-105,100)), top=Age("X07CR1519"), left=study_years("X07CR1519")),
+  arrangeGrob(PlotTimeSeries("X07CR2024",data,ylim = c(-105,100)), top=Age("X07CR2024")),
+  arrangeGrob(PlotTimeSeries("X07CR2529",data,ylim = c(-105,100)), top=Age("X07CR2529")),
+  arrangeGrob(PlotTimeSeries("X07CR3034",data,ylim = c(-105,100)), top=Age("X07CR3034")),
+  arrangeGrob(PlotTimeSeries("X07CR3539",data,ylim = c(-105,100)), top=Age("X07CR3539")),
+  arrangeGrob(PlotTimeSeries("X07CR40",data,ylim = c(-105,100)), top="40+"),
+  arrangeGrob(PlotTimeSeries("X8CR1519",data,ylim = c(-105,100)), left=study_years("X8CR1519")),
+  arrangeGrob(PlotTimeSeries("X8CR2024",data,ylim = c(-105,100))),
+  arrangeGrob(PlotTimeSeries("X8CR2529",data,ylim = c(-105,100))),
+  arrangeGrob(PlotTimeSeries("X8CR3034",data,ylim = c(-105,100))),
+  arrangeGrob(PlotTimeSeries("X8CR3539",data,ylim = c(-105,100))),
+  arrangeGrob(PlotTimeSeries("X8CR40",data,ylim = c(-105,100))),
+  arrangeGrob(PlotTimeSeries("X12CR1519",data,ylim = c(-105,100)), left=study_years("X12CR1519")),
+  arrangeGrob(PlotTimeSeries("X12CR2024",data,ylim = c(-105,100))),
+  arrangeGrob(PlotTimeSeries("X12CR2529",data,ylim = c(-105,100))),
+  arrangeGrob(PlotTimeSeries("X12CR3034",data,ylim = c(-105,100))),
+  arrangeGrob(PlotTimeSeries("X12CR3539",data,ylim = c(-105,100))),
+  arrangeGrob(PlotTimeSeries("X12CR40",data,ylim = c(-105,100))),
   ncol=6,
   top = textGrob("Costa Rica \n Age (years)",gp=gpar(fontsize=15,font=2)),
-  left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90)
+  left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90),
+  bottom=textGrob("Time",gp=gpar(fontsize=15,font=2))
  )
 grid2<-grid.arrange(grid1,legend,ncol=1, heights=c(10,1))
 
@@ -271,35 +303,39 @@ grid3<-grid.arrange(
   arrangeGrob(PlotTimeSeries("X12B40",data)),
   ncol=6,
   top = textGrob("Brazil \n Age (years)",gp=gpar(fontsize=15,font=2)),
-  left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90)
+  left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90),
+  bottom=textGrob("Time",gp=gpar(fontsize=15,font=2))
 )
 grid4<-grid.arrange(grid3,legend,ncol=1, heights=c(10,1))
 
+
+#Cuba was discarted from the paper due bad quality data
 #Grid for Cuba
-grid5<-grid.arrange(
-  arrangeGrob(PlotTimeSeries("X07CB1519",data), top=Age("X07CB1519"), left=study_years("X07CB1519")),
-  arrangeGrob(PlotTimeSeries("X07CB2024",data), top=Age("X07CB2024")),
-  arrangeGrob(PlotTimeSeries("X07CB2529",data), top=Age("X07CB2529")),
-  arrangeGrob(PlotTimeSeries("X07CB3034",data), top=Age("X07CB3034")),
-  arrangeGrob(PlotTimeSeries("X07CB3539",data), top=Age("X07CB3539")),
-  arrangeGrob(PlotTimeSeries("X07CB40",data), top="40+"),
-  arrangeGrob(PlotTimeSeries("X8CB1519",data), left=study_years("X8CB1519")),
-  arrangeGrob(PlotTimeSeries("X8CB2024",data)),
-  arrangeGrob(PlotTimeSeries("X8CB2529",data)),
-  arrangeGrob(PlotTimeSeries("X8CB3034",data)),
-  arrangeGrob(PlotTimeSeries("X8CB3539",data)),
-  arrangeGrob(PlotTimeSeries("X8CB40",data)),
-  arrangeGrob(PlotTimeSeries("X12CB1519",data), left=study_years("X12CB1519")),
-  arrangeGrob(PlotTimeSeries("X12CB2024",data)),
-  arrangeGrob(PlotTimeSeries("X12CB2529",data)),
-  arrangeGrob(PlotTimeSeries("X12CB3034",data)),
-  arrangeGrob(PlotTimeSeries("X12CB3539",data)),
-  arrangeGrob(PlotTimeSeries("X12CB40",data)),
-  ncol=6,
-  top = textGrob("Cuba \n Age (years)",gp=gpar(fontsize=15,font=2)),
-  left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90)
-)
-grid6<-grid.arrange(grid5,legend,ncol=1, heights=c(10,1))
+#grid5<-grid.arrange(
+#  arrangeGrob(PlotTimeSeries("X07CB1519",data), top=Age("X07CB1519"), left=study_years("X07CB1519")),
+#  arrangeGrob(PlotTimeSeries("X07CB2024",data), top=Age("X07CB2024")),
+#  arrangeGrob(PlotTimeSeries("X07CB2529",data), top=Age("X07CB2529")),
+#  arrangeGrob(PlotTimeSeries("X07CB3034",data), top=Age("X07CB3034")),
+#  arrangeGrob(PlotTimeSeries("X07CB3539",data), top=Age("X07CB3539")),
+#  arrangeGrob(PlotTimeSeries("X07CB40",data), top="40+"),
+#  arrangeGrob(PlotTimeSeries("X8CB1519",data), left=study_years("X8CB1519")),
+#  arrangeGrob(PlotTimeSeries("X8CB2024",data)),
+#  arrangeGrob(PlotTimeSeries("X8CB2529",data)),
+#  arrangeGrob(PlotTimeSeries("X8CB3034",data)),
+#  arrangeGrob(PlotTimeSeries("X8CB3539",data)),
+#  arrangeGrob(PlotTimeSeries("X8CB40",data)),
+#  arrangeGrob(PlotTimeSeries("X12CB1519",data), left=study_years("X12CB1519")),
+#  arrangeGrob(PlotTimeSeries("X12CB2024",data)),
+#  arrangeGrob(PlotTimeSeries("X12CB2529",data)),
+#  arrangeGrob(PlotTimeSeries("X12CB3034",data)),
+#  arrangeGrob(PlotTimeSeries("X12CB3539",data)),
+#  arrangeGrob(PlotTimeSeries("X12CB40",data)),
+#  ncol=6,
+#  top = textGrob("Cuba \n Age (years)",gp=gpar(fontsize=15,font=2)),
+#  left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90),
+#   bottom=textGrob("Time",gp=gpar(fontsize=15,font=2))
+#)
+#grid6<-grid.arrange(grid5,legend,ncol=1, heights=c(10,1))
 
 #Grid for Mexico
 
@@ -324,7 +360,8 @@ grid7<-grid.arrange(
   arrangeGrob(PlotTimeSeries("X12M40",data)),
   ncol=6,
   top = textGrob("Mexico \n Age (years)",gp=gpar(fontsize=15,font=2)),
-  left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90)
+  left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90),
+  bottom=textGrob("Time",gp=gpar(fontsize=15,font=2))
 )
 grid8<-grid.arrange(grid7,legend,ncol=1, heights=c(10,1))
 
@@ -352,6 +389,7 @@ grid9<-grid.arrange(
   arrangeGrob(PlotTimeSeries("X12CH40",data)),
   ncol=6,
   top = textGrob("Chile \n Age (years)",gp=gpar(fontsize=15,font=2)),
-  left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90)
+  left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90),
+  bottom=textGrob("Time",gp=gpar(fontsize=15,font=2))
 )
 grid10<-grid.arrange(grid9,legend,ncol=1, heights=c(10,1))
