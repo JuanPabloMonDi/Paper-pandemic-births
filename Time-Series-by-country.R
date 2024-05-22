@@ -275,7 +275,7 @@ grid1<-grid.arrange(
   arrangeGrob(PlotTimeSeries("X12CR3539",data,ylim = c(-105,100))),
   arrangeGrob(PlotTimeSeries("X12CR40",data,ylim = c(-105,100))),
   ncol=6,
-  top = textGrob("Costa Rica \n Age (years)",gp=gpar(fontsize=15,font=2)),
+  top = textGrob("Costa Rica \n Age group",gp=gpar(fontsize=15,font=2)),
   left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90),
   bottom=textGrob("Births in month",gp=gpar(fontsize=15,font=2))
  )
@@ -303,7 +303,7 @@ grid3<-grid.arrange(
   arrangeGrob(PlotTimeSeries("X12B3539",data)),
   arrangeGrob(PlotTimeSeries("X12B40",data)),
   ncol=6,
-  top = textGrob("Brazil \n Age (years)",gp=gpar(fontsize=15,font=2)),
+  top = textGrob("Brazil \n Age group",gp=gpar(fontsize=15,font=2)),
   left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90),
   bottom=textGrob("Births in month",gp=gpar(fontsize=15,font=2))
 )
@@ -332,7 +332,7 @@ grid4<-grid.arrange(grid3,legend,ncol=1, heights=c(10,1))
 #  arrangeGrob(PlotTimeSeries("X12CB3539",data)),
 #  arrangeGrob(PlotTimeSeries("X12CB40",data)),
 #  ncol=6,
-#  top = textGrob("Cuba \n Age (years)",gp=gpar(fontsize=15,font=2)),
+#  top = textGrob("Cuba \n Age group",gp=gpar(fontsize=15,font=2)),
 #  left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90),
 #   bottom=textGrob("Time",gp=gpar(fontsize=15,font=2))
 #)
@@ -360,7 +360,7 @@ grid7<-grid.arrange(
   arrangeGrob(PlotTimeSeries("X12M3539",data)),
   arrangeGrob(PlotTimeSeries("X12M40",data)),
   ncol=6,
-  top = textGrob("Mexico \n Age (years)",gp=gpar(fontsize=15,font=2)),
+  top = textGrob("Mexico \n Age group",gp=gpar(fontsize=15,font=2)),
   left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90),
   bottom=textGrob("Births in month",gp=gpar(fontsize=15,font=2))
 )
@@ -389,7 +389,7 @@ grid9<-grid.arrange(
   arrangeGrob(PlotTimeSeries("X12CH3539",data)),
   arrangeGrob(PlotTimeSeries("X12CH40",data)),
   ncol=6,
-  top = textGrob("Chile \n Age (years)",gp=gpar(fontsize=15,font=2)),
+  top = textGrob("Chile \n Age group",gp=gpar(fontsize=15,font=2)),
   left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90),
   bottom=textGrob("Births in month",gp=gpar(fontsize=15,font=2))
 )
