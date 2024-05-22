@@ -146,7 +146,7 @@ if (legend==T){
   legend_position="bottom"
 }else{legend_position="none"}
 
-line<-data.frame(x1=2020.85,x2=2021.375,y1=maxlim-20,y2=maxlim-20)
+line<-data.frame(x1=2020.85,x2=2021.7,y1=maxlim-20,y2=maxlim-20)
 
 #Now, we will plot the time series, most of the parameters are just for aesthetic purposes.
 #A simpler code could be plot(PrevArima)
@@ -160,34 +160,35 @@ Graph<-autoplot(prevArima,color="blue",series="Forecast", PI=F) + #plot time ser
               alpha = 0.1,
               color="black",
               linetype="dotted")+
+  theme_bw()+ #set_theme
   autolayer(tedata,series="Observed",colour = T)+ #plot observed data
   autolayer(prevArima$mean,series="Forecasted",colour=T)+ #plot predicted data
   scale_x_continuous(labels = function(x) format(as.yearmon(x, origin = "2012-10-01"), "%b-%Y"))+ #Set the x-axis to date format
   coord_cartesian(xlim = as.yearmon(c("2020-10", "2022-12")))+  #Horizontal limits in date format 
   ylim(c(min(minlim,-maxlim)),max(-minlim,maxlim))+ #Range of plot
-  theme(plot.title = element_text(size=10), #Title size
-        legend.position = legend_position, #Legend position
+  theme(legend.position = legend_position, #Legend position
+        plot.title = element_text(size=10), #Title size
         axis.title.x=element_blank(), #Remove x axis lab
-        axis.text.x=element_text(angle = 0, vjust = 0.5, hjust=1,size = 8), #Modify x axis values
+        axis.text.x=element_text(angle = 0, vjust = 0.5, hjust=1,size = 5), #Modify x axis values
         axis.ticks.y = element_blank(),  # Remove y axis values
         axis.title.y = element_blank(), # Remove y labs
         axis.ticks.x=element_blank())+ # Remove x ticks
   ggtitle(titlee)+  #Add title to the graph
   geom_line(data = data.frame(x = c(max(time(prevArima$x)), min(time(prevArima$mean))), y = c(prevArima$x[length(prevArima$x)], prevArima$mean[1])),
             aes(x = x, y = y), color = "blue")+ #Fill the hole between the last observation and the first prediction that is made by the autoplot function
-  labs(x="Births in months", y="Variation",colour="Birth counts",legend.position = "top")+ #Add names for X and Y axis
+  labs(x="Births in months", y="Variation",colour="Birth counts")+ #Add names for X and Y axis
   geom_vline(xintercept=2020.833,color="#a3a3a3",alpha=0.95)+ #Horizontal line to mark the beginning of pandemic
-  annotate("text",x = 2021.1, y = maxlim-10, label = "Pandemic", color = "#a3a3a3",size=5,fontface="bold")+  #Add text "Pandemic" to the graph
+  annotate("text",x = 2021.25, y = maxlim-10, label = "Pandemic", color = "#a3a3a3",size=2.5,fontface="bold")+  #Add text "Pandemic" to the graph
   #Draw the arrow below the "pandemic" text
   geom_segment(aes(x = x1, xend = x2,
                y = y1, yend = y2),data = line, 
-               color = "#a3a3a3",linewidth =1.25,
-               arrow = arrow(length = unit(0.125,"inch")),
+               color = "#a3a3a3",linewidth =0.7,
+               arrow = arrow(length = unit(0.0725,"inch")),
                lineend = "round",
                linejoin = "round"
                )+
-  scale_color_manual(values=c("blue","red"))+#Set colors of the legend
-  theme_bw() #set_theme
+  scale_color_manual(values=c("blue","red"))#Set colors of the legend
+
  return(Graph)}
 }
 
@@ -276,7 +277,7 @@ grid1<-grid.arrange(
   ncol=6,
   top = textGrob("Costa Rica \n Age (years)",gp=gpar(fontsize=15,font=2)),
   left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90),
-  bottom=textGrob("Time",gp=gpar(fontsize=15,font=2))
+  bottom=textGrob("Births in month",gp=gpar(fontsize=15,font=2))
  )
 grid2<-grid.arrange(grid1,legend,ncol=1, heights=c(10,1))
 
@@ -304,7 +305,7 @@ grid3<-grid.arrange(
   ncol=6,
   top = textGrob("Brazil \n Age (years)",gp=gpar(fontsize=15,font=2)),
   left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90),
-  bottom=textGrob("Time",gp=gpar(fontsize=15,font=2))
+  bottom=textGrob("Births in month",gp=gpar(fontsize=15,font=2))
 )
 grid4<-grid.arrange(grid3,legend,ncol=1, heights=c(10,1))
 
@@ -361,7 +362,7 @@ grid7<-grid.arrange(
   ncol=6,
   top = textGrob("Mexico \n Age (years)",gp=gpar(fontsize=15,font=2)),
   left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90),
-  bottom=textGrob("Time",gp=gpar(fontsize=15,font=2))
+  bottom=textGrob("Births in month",gp=gpar(fontsize=15,font=2))
 )
 grid8<-grid.arrange(grid7,legend,ncol=1, heights=c(10,1))
 
@@ -390,6 +391,6 @@ grid9<-grid.arrange(
   ncol=6,
   top = textGrob("Chile \n Age (years)",gp=gpar(fontsize=15,font=2)),
   left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90),
-  bottom=textGrob("Time",gp=gpar(fontsize=15,font=2))
+  bottom=textGrob("Births in month",gp=gpar(fontsize=15,font=2))
 )
 grid10<-grid.arrange(grid9,legend,ncol=1, heights=c(10,1))
