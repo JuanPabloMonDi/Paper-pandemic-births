@@ -140,7 +140,7 @@ accuracy(prevArima)
 #If true, we add the title and legend to the plot
 titles<-info_variable(Variable)
 if (tittle==T){
-  titlee<-paste("Women between ",titles[[3]],"-",titles[[4]]," with ",titles[[1]],"years of studies - ",titles[[2]])
+  titlee<-paste("Women between ",titles[[3]],"-",titles[[4]]," with ",titles[[1]],"years of schooling - ",titles[[2]])
 }else{titlee=" "}
 if (legend==T){
   legend_position="bottom"
@@ -276,7 +276,7 @@ grid1<-grid.arrange(
   arrangeGrob(PlotTimeSeries("X12CR40",data,ylim = c(-105,100))),
   ncol=6,
   top = textGrob("Costa Rica \n Age group",gp=gpar(fontsize=15,font=2)),
-  left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90),
+  left= textGrob("Years of schooling", gp=gpar(fontsize=15,font=2),rot=90),
   bottom=textGrob("Births in month",gp=gpar(fontsize=15,font=2))
  )
 grid2<-grid.arrange(grid1,legend,ncol=1, heights=c(10,1))
@@ -304,7 +304,7 @@ grid3<-grid.arrange(
   arrangeGrob(PlotTimeSeries("X12B40",data)),
   ncol=6,
   top = textGrob("Brazil \n Age group",gp=gpar(fontsize=15,font=2)),
-  left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90),
+  left= textGrob("Years of schooling", gp=gpar(fontsize=15,font=2),rot=90),
   bottom=textGrob("Births in month",gp=gpar(fontsize=15,font=2))
 )
 grid4<-grid.arrange(grid3,legend,ncol=1, heights=c(10,1))
@@ -333,7 +333,7 @@ grid4<-grid.arrange(grid3,legend,ncol=1, heights=c(10,1))
 #  arrangeGrob(PlotTimeSeries("X12CB40",data)),
 #  ncol=6,
 #  top = textGrob("Cuba \n Age group",gp=gpar(fontsize=15,font=2)),
-#  left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90),
+#  left= textGrob("Years of schooling", gp=gpar(fontsize=15,font=2),rot=90),
 #   bottom=textGrob("Time",gp=gpar(fontsize=15,font=2))
 #)
 #grid6<-grid.arrange(grid5,legend,ncol=1, heights=c(10,1))
@@ -361,7 +361,7 @@ grid7<-grid.arrange(
   arrangeGrob(PlotTimeSeries("X12M40",data)),
   ncol=6,
   top = textGrob("Mexico \n Age group",gp=gpar(fontsize=15,font=2)),
-  left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90),
+  left= textGrob("Years of schooling", gp=gpar(fontsize=15,font=2),rot=90),
   bottom=textGrob("Births in month",gp=gpar(fontsize=15,font=2))
 )
 grid8<-grid.arrange(grid7,legend,ncol=1, heights=c(10,1))
@@ -390,7 +390,7 @@ grid9<-grid.arrange(
   arrangeGrob(PlotTimeSeries("X12CH40",data)),
   ncol=6,
   top = textGrob("Chile \n Age group",gp=gpar(fontsize=15,font=2)),
-  left= textGrob("Years of study", gp=gpar(fontsize=15,font=2),rot=90),
+  left= textGrob("Years of schooling", gp=gpar(fontsize=15,font=2),rot=90),
   bottom=textGrob("Births in month",gp=gpar(fontsize=15,font=2))
 )
 grid10<-grid.arrange(grid9,legend,ncol=1, heights=c(10,1))
