@@ -9,10 +9,10 @@ library(ggplot2)
 ### Load the data --------------------------------
 
 #Load the data of percentage variation of births
-data = read.csv("nascimentos_auto_arima_maio.csv", sep = ";")
+data = read.csv("data/Variation_of_births.csv", sep = ";")
 
 #Load the estimated total fecundity Rates (TFR) 
-TFE<-read_csv("wcde_data.csv",skip=8)
+TFE<-read_csv("data/wcde_data.csv",skip=8)
 
 #At the end, we didn't consider Cuba in the study. Let's remove it from the database
 TFE<-TFE[TFE$Area!="Cuba",]
@@ -116,52 +116,57 @@ TFE["Years_Study"]<-(sapply(TFE$Education,YearsStudy))
 
 Rates <- aggregate(Rate ~ Area+Age+ Years_Study, data = TFE, FUN = mean)
 
-#Tomamos nossa dada de referencia, Julio de 2022
+#We take our reference motnh, July 2022
 
-Corte<-data[data$Mes=="2022-07",]
-Corte2<-data[data$Mes=="2021-07",]
-#Vamos crear uma tabela sobre as variacoes por pais,
-Variacao<-NULL
-for (Coluna in colnames(Corte)[2:length(colnames(Corte))]){
-  Ag<-Age(Coluna)
-  Pa<-pais(Coluna)[[1]]
-  if (Pa %in% c("Chile","Cuba")){ Var<-Corte2[[Coluna]]}else{
-  Var<-Corte[[Coluna]]}
-  Stu<-anos_estudo(Coluna)[[1]]
+ReferenceDate<-data[data$Mes=="2022-07",]
+ReferenceDate2<-data[data$Mes=="2021-07",]
+
+
+#Now, lets create a table with the variation of TFR by country
+Variation<-NULL
+for (Column in colnames(ReferenceDate)[2:length(colnames(ReferenceDate))]){
+  Ag<-Age(Column)
+  Pa<-country(Column)[[1]]
+  if (Pa %in% c("Chile","Cuba")){ Var<-ReferenceDate2[[Column]]}else{
+  Var<-ReferenceDate[[Column]]}
+  Stu<-study_years(Column)[[1]]
   Fila<-data.frame(Area=Pa,Age=Ag,Years_Study=Stu,Var=Var)
-  Variacao<-rbind(Variacao,Fila)
+  Variation<-rbind(Variation,Fila)
 }
-#Mudamos o nome a 40+
-Variacao[!(Variacao$Age %in% c("15 - 19","20 - 24","25 - 29","30 - 34","35 - 39")),]["Age"]<-"40+"
 
-#Tiramos a Cuba e outros valores onde nao se tenha data
-Variacao<-na.omit(Variacao)
-#Apricamos o efeito da pandemia (Variaciao) em cada grupo
-Rates<-merge(Rates,Variacao, by=c("Area","Age","Years_Study"))
+
+Variation[!(Variation$Age %in% c("15 - 19","20 - 24","25 - 29","30 - 34","35 - 39")),]["Age"]<-"40+"
+
+#remove Cuba an outer countries that does not have any data.
+Variation<-na.omit(Variation)
+
+#Apply the pandemic on the TFR pf each group
+Rates<-merge(Rates,Variation, by=c("Area","Age","Years_Study"))
 Rates["WithEffect"]<-Rates$Rate*(1+Rates$Var/100)
 
-#Calculamos a TFT sem efeito da pandemia
-TFTSemQueda<-aggregate(Rate~Area+Years_Study,data=Rates,FUN=sum)
-TFTSemQueda$Rate<-TFTSemQueda$Rate*5
-#Calculamos a TFT com efeito da pandemia
-TFTComQueda<-aggregate(WithEffect~Area+Years_Study,data=Rates,FUN=sum)
-TFTComQueda$WithEffect<-TFTComQueda$WithEffect*5
+#Calculate the TFR without the effect of the pandemic
+TFRProjected<-aggregate(Rate~Area+Years_Study,data=Rates,FUN=sum)
+TFRProjected$Rate<-TFRProjected$Rate*5
 
-#Fazemos uma tabela conjunta para fazer mais facil a comparacao
-TFT<-merge(TFTSemQueda,TFTComQueda,by=c("Area","Years_Study"))
-TFT<-TFT%>% arrange(Area,desc(Years_Study))
-write_xlsx(TFT,"TFT.xlsx")
+#Calculate the THR with the effect of the pandemic
+TFRWithPandemic<-aggregate(WithEffect~Area+Years_Study,data=Rates,FUN=sum)
+TFRWithPandemic$WithEffect<-TFRWithPandemic$WithEffect*5
+
+#Make a joint table of the TFR to make comparison easier.
+TFR<-merge(TFRProjected,TFRWithPandemic,by=c("Area","Years_Study"))
+TFR<-TFR%>% arrange(Area,desc(Years_Study))
+write_xlsx(TFR,"TFR.xlsx")
 
 
-datos_long <- tidyr::pivot_longer(TFT, cols = c(Rate, WithEffect), names_to = "TFTType", values_to = "Rate")
+data_long <- tidyr::pivot_longer(TFR, cols = c(Rate, WithEffect), names_to = "TFR_Type", values_to = "Rate")
 
-datos_long$Years_Study <- factor(datos_long$Years_Study, levels = c("at most 7", "8-11", "12 or more"))
-ggplot(datos_long, aes(x = Years_Study , y = Rate, 
-                fill = TFTType))+   
+data_long$Years_Study <- factor(data_long$Years_Study, levels = c("at most 7", "8-11", "12 or more"))
+ggplot(data_long, aes(x = Years_Study , y = Rate, 
+                fill = TFR_Type))+theme_bw()+
   labs(title="Total Fecundity Rate by country")+xlab("Years of study")+
   geom_col(position = 'dodge', color = "gray50")+
   facet_grid( ~ Area, switch = "x")+
   scale_fill_manual(values = c("darkblue", "lightblue3"),
                     labels = c("Without effect", "With effect"),
-                    name="TFR")+theme_bw()+
+                    name="TFR")+
   geom_hline(yintercept = 2.1, linetype = "dashed", color = "black")

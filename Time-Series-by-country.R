@@ -14,7 +14,7 @@ library("xlsx")
 library("ggplot2")
 
 ### Import dataset #--------------------
-data= read.csv("Variation_of_births.csv", sep = ";")
+data= read.csv("data/Variation_of_births.csv", sep = ";")
 data$Mes<-as.yearmon(data$Mes)
 
 
