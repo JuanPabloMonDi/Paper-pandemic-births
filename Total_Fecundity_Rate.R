@@ -120,17 +120,24 @@ Rates <- aggregate(Rate ~ Area+Age+ Years_Study, data = TFE, FUN = mean)
 
 ReferenceDate<-data[data$Mes=="2022-07",]
 ReferenceDate2<-data[data$Mes=="2021-07",]
-
+year2022<-data[data$Mes>=as.yearmon("2022-1"),]
+year2021<-data[data$Mes>=as.yearmon("2021-1") & data$Mes<as.yearmon("2022-1"),]
 
 #Now, lets create a table with the variation of TFR by country
 Variation<-NULL
 for (Column in colnames(ReferenceDate)[2:length(colnames(ReferenceDate))]){
   Ag<-Age(Column)
   Pa<-country(Column)[[1]]
-  if (Pa %in% c("Chile","Cuba")){ Var<-ReferenceDate2[[Column]]}else{
-  Var<-ReferenceDate[[Column]]}
+  if (Pa %in% c("Chile","Cuba")){ 
+    Var<-ReferenceDate2[[Column]] #Variation of the specific month
+    MeanVar<-colMeans(year2021[2:91])
+    MeanVar<-MeanVar[[Column]] #Mean variation of 2021
+  }else{
+  Var<-ReferenceDate[[Column]]
+  MeanVar<-colMeans(year2022[2:91])
+  MeanVar<-MeanVar[[Column]]}
   Stu<-study_years(Column)[[1]]
-  Fila<-data.frame(Area=Pa,Age=Ag,Years_Study=Stu,Var=Var)
+  Fila<-data.frame(Area=Pa,Age=Ag,Years_Study=Stu,Var=Var, MeanVar=MeanVar)
   Variation<-rbind(Variation,Fila)
 }
 
@@ -143,21 +150,27 @@ Variation<-na.omit(Variation)
 #Apply the pandemic on the TFR pf each group
 Rates<-merge(Rates,Variation, by=c("Area","Age","Years_Study"))
 Rates["WithEffect"]<-Rates$Rate*(1+Rates$Var/100)
+Rates["WithEffectMean"]<-Rates$Rate*(1+Rates$MeanVar/100)
 
 #Calculate the TFR without the effect of the pandemic
 TFRProjected<-aggregate(Rate~Area+Years_Study,data=Rates,FUN=sum)
 TFRProjected$Rate<-TFRProjected$Rate*5
 
-#Calculate the THR with the effect of the pandemic
-TFRWithPandemic<-aggregate(WithEffect~Area+Years_Study,data=Rates,FUN=sum)
-TFRWithPandemic$WithEffect<-TFRWithPandemic$WithEffect*5
+#Calculate the TFR with the effect of the pandemic
+TFRWithPandemic<-aggregate(WithEffect~Area+Years_Study,data=Rates,FUN=sum) #considering july
+TFRWithPandemicMean<-aggregate(WithEffectMean~Area+Years_Study,data=Rates,FUN=sum) #considering the mean variation pf 2022
 
+TFRWithPandemic$WithEffect<-TFRWithPandemic$WithEffect*5 #Each age group has a length of 5
+TFRWithPandemicMean$WithEffectMean<-TFRWithPandemicMean$WithEffectMean*5
 #Make a joint table of the TFR to make comparison easier.
 TFR<-merge(TFRProjected,TFRWithPandemic,by=c("Area","Years_Study"))
+TFR<-merge(TFR,TFRWithPandemicMean,by=c("Area","Years_Study"))
 TFR<-TFR%>% arrange(Area,desc(Years_Study))
 write_xlsx(TFR,"TFR.xlsx")
 
+#Now, lets plot this variations to have a different view of the data
 
+#With the effect of the variations of july
 data_long <- tidyr::pivot_longer(TFR, cols = c(Rate, WithEffect), names_to = "TFR_Type", values_to = "Rate")
 
 data_long$Years_Study <- factor(data_long$Years_Study, levels = c("at most 7", "8-11", "12 or more"))
@@ -168,5 +181,20 @@ ggplot(data_long, aes(x = Years_Study , y = Rate,
   facet_grid( ~ Area, switch = "x")+
   scale_fill_manual(values = c("darkblue", "lightblue3"),
                     labels = c("Without effect", "With effect"),
+                    name="TFR")+
+  geom_hline(yintercept = 2.1, linetype = "dashed", color = "black")
+
+#With the effect of the mean variations
+
+data_long <- tidyr::pivot_longer(TFR, cols = c(Rate, WithEffectMean), names_to = "TFR_Type", values_to = "Rate")
+
+data_long$Years_Study <- factor(data_long$Years_Study, levels = c("at most 7", "8-11", "12 or more"))
+ggplot(data_long, aes(x = Years_Study , y = Rate, 
+                      fill = TFR_Type))+theme_bw()+
+  labs(title="Total Fecundity Rate by country")+xlab("Years of schooling")+
+  geom_col(position = 'dodge', color = "gray50")+
+  facet_grid( ~ Area, switch = "x")+
+  scale_fill_manual(values = c("darkblue", "lightblue3"),
+                    labels = c("Without effect", "With mean effect"),
                     name="TFR")+
   geom_hline(yintercept = 2.1, linetype = "dashed", color = "black")
