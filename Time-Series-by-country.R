@@ -12,11 +12,13 @@ library(gridExtra)
 library(forecast)
 library("xlsx")
 library("ggplot2")
+library(readxl)
 
-### Import dataset #--------------------
+### Import data set #--------------------
 data= read.csv("data/Variation_of_births.csv", sep = ";")
+data2023=read_excel("data/Brasil2023.xlsx")
 data$Mes<-as.yearmon(data$Mes)
-
+data2023$Mes<-as.yearmon(data2023$Mes)
 
 ### Obtain the information of the variable -------------------------
 
@@ -394,3 +396,136 @@ grid9<-grid.arrange(
   bottom=textGrob("Births in month",gp=gpar(fontsize=15,font=2))
 )
 grid10<-grid.arrange(grid9,legend,ncol=1, heights=c(10,1))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PlotTimeSeries2023<-function(Variable,data, legend=F,tittle=F, ylim=c(-80,80)){
+  
+  #Variable: The name of the column/variable in the data set
+  
+  #data: The dataset where the data is going to be obtained
+  
+  # legend: plot legend in graph
+  
+  # title: plot an automated title generated with the name, age group and years of study 
+  
+  #ylim: a vector of length 2 which values are used to adjust the range on the plot the graph. If NULL, it will only consider the variable in the function.
+  #     If "country" it will consider all time series referring to the same country to adjust ylim on the plot
+  #     If "all" it will consider all the countries in dataset. if "notCR" it wont consider neither Cuba or Costa Rica (this because their variations are very high)
+  
+  
+  #Select the columns that are for the same country of the Variable
+  country_columns<-colnames(data)[sapply(colnames(data),country)%in% country(Variable)]
+  
+  #Now we will adjust the range of the plot, it depends if it wants to be the same for all the countries or not
+  if (class(ylim)=="numeric"){maxlim<-ylim[2]
+  minlim<-ylim[1]}else{
+    if (is.null(ylim) == T){
+      data2<-data[c("Mes",Variable)]}else{
+        if (ylim=="country"){
+          data2<-data[c("Mes",country_columns)]}
+        if(ylim =="notCR"){
+          data2<-data[colnames(data)[sapply(colnames(data),country)!="Cuba"]]
+          data2<-data2[colnames(data2)[sapply(colnames(data2),country)!="Costa Rica"]]}
+      }
+    if (is.null(ylim)==T){
+      maxlim<-max(data2[data2$Mes>"Out 2020",][2:ncol(data2)], na.rm = T)+20
+      minlim<-min(data2[data2$Mes>"Out 2020",][2:ncol(data2)], na.rm = T)-20
+    }else{
+      if (ylim%in%c("country","notCR")){
+        maxlim<-max(data2[data2$Mes>"Out 2020",][2:ncol(data2)], na.rm = T)+20
+        minlim<-min(data2[data2$Mes>"Out 2020",][2:ncol(data2)], na.rm = T)-20
+      }else{if (ylim=="all"){
+        maxlim<-max(data[data$Mes>"Out 2020",][2:ncol(data)], na.rm = T)+20
+        minlim<-min(data[data$Mes>"Out 2020",][2:ncol(data)], na.rm = T)-20
+      }}}}
+  
+  #Just in case there is no data available in the selected column
+  if (nrow(data[!is.na(data[Variable]),][Variable])==0){return(ggplot() +
+                                                                 labs(x = "", y = "", title = "")+
+                                                                 annotate("text",x = 2021.665, y = (maxlim-minlim)/2, size = 10, label="No info",color = "black")+
+                                                                 xlim(c(2020.83,2022.5))+ #Os limites horizontais do Graph
+                                                                 ylim(c(minlim-10,maxlim+10)) #Os limites verticais do Graph
+  )}else{
+    
+    #now, we make the arima process    
+    train_data = ts(data[Variable], start = c(2012,1), end = c(2022,12), frequency = 12)
+    data_ts = ts(data[Variable], start = c(2012,1), end = c(2023,12), frequency = 12)
+    tedata = window(data_ts, start=c(2020,11), end=c(2022,12))
+    
+    ModArima = auto.arima(train_data, trace = T, stepwise = F, approximation = F)
+    prevArima=forecast(ModArima, h=36, level = 95) #The parameter "level" establish the confidence intervals. It can be a vector to plot multiple intervals
+    accuracy(prevArima)
+    
+    #If true, we add the title and legend to the plot
+    titles<-info_variable(Variable)
+    if (tittle==T){
+      titlee<-paste("Women between ",titles[[3]],"-",titles[[4]]," with ",titles[[1]],"years of schooling - ",titles[[2]])
+    }else{titlee=" "}
+    if (legend==T){
+      legend_position="bottom"
+    }else{legend_position="none"}
+    
+    line<-data.frame(x1=2020.85,x2=2021.7,y1=maxlim-20,y2=maxlim-20)
+    
+    #Now, we will plot the time series, most of the parameters are just for aesthetic purposes.
+    #A simpler code could be plot(PrevArima)
+    
+    Graph<-autoplot(prevArima,color="blue",series="Forecast", PI=F) + #plot time series
+      #Settings for confidence interval
+      geom_ribbon(aes( x=seq(2020.833, by = 0.0833333, length.out = 36),
+                       ymin = lower, ymax = upper),
+                  data =data.frame(lower=as.numeric(prevArima$lower[,1]),upper=as.numeric(prevArima$upper[,1]))  ,
+                  fill = "black",
+                  alpha = 0.1,
+                  color="black",
+                  linetype="dotted")+
+      theme_bw()+ #set_theme
+      autolayer(tedata,series="Observed",colour = T)+ #plot observed data
+      autolayer(prevArima$mean,series="Forecasted",colour=T)+ #plot predicted data
+      scale_x_continuous(labels = function(x) format(as.yearmon(x, origin = "2012-10-01"), "%b-%Y"))+ #Set the x-axis to date format
+      coord_cartesian(xlim = as.yearmon(c("2020-10", "2022-12")))+  #Horizontal limits in date format 
+      ylim(c(min(minlim,-maxlim)),max(-minlim,maxlim))+ #Range of plot
+      theme(legend.position = legend_position, #Legend position
+            plot.title = element_text(size=10), #Title size
+            axis.title.x=element_blank(), #Remove x axis lab
+            axis.text.x=element_text(angle = 0, vjust = 0.5, hjust=1,size = 5), #Modify x axis values
+            axis.ticks.y = element_blank(),  # Remove y axis values
+            axis.title.y = element_blank(), # Remove y labs
+            axis.ticks.x=element_blank())+ # Remove x ticks
+      ggtitle(titlee)+  #Add title to the graph
+      geom_line(data = data.frame(x = c(max(time(prevArima$x)), min(time(prevArima$mean))), y = c(prevArima$x[length(prevArima$x)], prevArima$mean[1])),
+                aes(x = x, y = y), color = "blue")+ #Fill the hole between the last observation and the first prediction that is made by the autoplot function
+      labs(x="Births in months", y="Variation",colour="Birth counts")+ #Add names for X and Y axis
+      geom_vline(xintercept=2020.833,color="#a3a3a3",alpha=0.95)+ #Horizontal line to mark the beginning of pandemic
+      annotate("text",x = 2021.25, y = maxlim-10, label = "Pandemic", color = "#a3a3a3",size=2.5,fontface="bold")+  #Add text "Pandemic" to the graph
+      #Draw the arrow below the "pandemic" text
+      geom_segment(aes(x = x1, xend = x2,
+                       y = y1, yend = y2),data = line, 
+                   color = "#a3a3a3",linewidth =0.7,
+                   arrow = arrow(length = unit(0.0725,"inch")),
+                   lineend = "round",
+                   linejoin = "round"
+      )+
+      scale_color_manual(values=c("blue","red"))#Set colors of the legend
+    
+    return(Graph)}
+}
