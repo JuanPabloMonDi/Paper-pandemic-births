@@ -1,0 +1,401 @@
+Source: Wittgenstein Centre for Demography and Global Human Capital (2023). Wittgenstein Centre Data Explorer Version 3.0
+Available at: www.wittgensteincentre.org/dataexplorer 
+
+""
+"Population Size by Education (000's)"
+"De facto population in a country or region, classified by sex and by five-year age groups. Available by level of educational attainment, in all scenarios, and at all geographical scales. Figures are presented in thousands."
+"Medium (SSP2)"
+" "
+"Area","Year","Age","Sex","Education","Population"
+"Brazil",2020,"15--19","Female","Total",7974.6
+"Brazil",2025,"15--19","Female","Total",7493.9
+"Chile",2020,"15--19","Female","Total",617.1
+"Chile",2025,"15--19","Female","Total",587.4
+"Costa Rica",2020,"15--19","Female","Total",184.4
+"Costa Rica",2025,"15--19","Female","Total",183.2
+"Mexico",2020,"15--19","Female","Total",5402.1
+"Mexico",2025,"15--19","Female","Total",5354.5
+"Brazil",2020,"20--24","Female","Total",8466.8
+"Brazil",2025,"20--24","Female","Total",7952.8
+"Chile",2020,"20--24","Female","Total",722
+"Chile",2025,"20--24","Female","Total",618.5
+"Costa Rica",2020,"20--24","Female","Total",197.6
+"Costa Rica",2025,"20--24","Female","Total",185.4
+"Mexico",2020,"20--24","Female","Total",5301.4
+"Mexico",2025,"20--24","Female","Total",5347.9
+"Brazil",2020,"25--29","Female","Total",8457.9
+"Brazil",2025,"25--29","Female","Total",8436.7
+"Chile",2020,"25--29","Female","Total",799.1
+"Chile",2025,"25--29","Female","Total",721.5
+"Costa Rica",2020,"25--29","Female","Total",206.9
+"Costa Rica",2025,"25--29","Female","Total",197.9
+"Mexico",2020,"25--29","Female","Total",5184.4
+"Mexico",2025,"25--29","Female","Total",5239.9
+"Brazil",2020,"30--34","Female","Total",8732
+"Brazil",2025,"30--34","Female","Total",8420.6
+"Chile",2020,"30--34","Female","Total",771.1
+"Chile",2025,"30--34","Female","Total",798.3
+"Costa Rica",2020,"30--34","Female","Total",210.7
+"Costa Rica",2025,"30--34","Female","Total",207.2
+"Mexico",2020,"30--34","Female","Total",4913.3
+"Mexico",2025,"30--34","Female","Total",5129.3
+"Brazil",2020,"35--39","Female","Total",8709.6
+"Brazil",2025,"35--39","Female","Total",8679.9
+"Chile",2020,"35--39","Female","Total",703.8
+"Chile",2025,"35--39","Female","Total",770
+"Costa Rica",2020,"35--39","Female","Total",195.8
+"Costa Rica",2025,"35--39","Female","Total",210.6
+"Mexico",2020,"35--39","Female","Total",4668.7
+"Mexico",2025,"35--39","Female","Total",4862.8
+"Brazil",2020,"40--44","Female","Total",7925.1
+"Brazil",2025,"40--44","Female","Total",8634.5
+"Chile",2020,"40--44","Female","Total",664.4
+"Chile",2025,"40--44","Female","Total",701.8
+"Costa Rica",2020,"40--44","Female","Total",173.7
+"Costa Rica",2025,"40--44","Female","Total",195.4
+"Mexico",2020,"40--44","Female","Total",4418.1
+"Mexico",2025,"40--44","Female","Total",4611.4
+"Brazil",2020,"45--49","Female","Total",7108.4
+"Brazil",2025,"45--49","Female","Total",7827.2
+"Chile",2020,"45--49","Female","Total",640.9
+"Chile",2025,"45--49","Female","Total",660.6
+"Costa Rica",2020,"45--49","Female","Total",157.2
+"Costa Rica",2025,"45--49","Female","Total",172.9
+"Mexico",2020,"45--49","Female","Total",4055.3
+"Mexico",2025,"45--49","Female","Total",4346
+"Brazil",2020,"15--19","Female","No Education",153.7
+"Brazil",2025,"15--19","Female","No Education",115.5
+"Chile",2020,"15--19","Female","No Education",1.7
+"Chile",2025,"15--19","Female","No Education",1.5
+"Costa Rica",2020,"15--19","Female","No Education",1
+"Costa Rica",2025,"15--19","Female","No Education",0.9
+"Mexico",2020,"15--19","Female","No Education",40.8
+"Mexico",2025,"15--19","Female","No Education",32.7
+"Brazil",2020,"20--24","Female","No Education",204.3
+"Brazil",2025,"20--24","Female","No Education",153.7
+"Chile",2020,"20--24","Female","No Education",2.6
+"Chile",2025,"20--24","Female","No Education",1.9
+"Costa Rica",2020,"20--24","Female","No Education",1.4
+"Costa Rica",2025,"20--24","Female","No Education",1.1
+"Mexico",2020,"20--24","Female","No Education",52.2
+"Mexico",2025,"20--24","Female","No Education",42
+"Brazil",2020,"25--29","Female","No Education",283.1
+"Brazil",2025,"25--29","Female","No Education",204
+"Chile",2020,"25--29","Female","No Education",3.9
+"Chile",2025,"25--29","Female","No Education",2.8
+"Costa Rica",2020,"25--29","Female","No Education",1.9
+"Costa Rica",2025,"25--29","Female","No Education",1.4
+"Mexico",2020,"25--29","Female","No Education",61.9
+"Mexico",2025,"25--29","Female","No Education",53.5
+"Brazil",2020,"30--34","Female","No Education",297.4
+"Brazil",2025,"30--34","Female","No Education",282.2
+"Chile",2020,"30--34","Female","No Education",4.6
+"Chile",2025,"30--34","Female","No Education",4
+"Costa Rica",2020,"30--34","Female","No Education",2.7
+"Costa Rica",2025,"30--34","Female","No Education",1.9
+"Mexico",2020,"30--34","Female","No Education",86.5
+"Mexico",2025,"30--34","Female","No Education",63.3
+"Brazil",2020,"35--39","Female","No Education",380.7
+"Brazil",2025,"35--39","Female","No Education",295.6
+"Chile",2020,"35--39","Female","No Education",4.8
+"Chile",2025,"35--39","Female","No Education",4.7
+"Costa Rica",2020,"35--39","Female","No Education",3.4
+"Costa Rica",2025,"35--39","Female","No Education",2.8
+"Mexico",2020,"35--39","Female","No Education",120.6
+"Mexico",2025,"35--39","Female","No Education",87.8
+"Brazil",2020,"40--44","Female","No Education",475.9
+"Brazil",2025,"40--44","Female","No Education",377.1
+"Chile",2020,"40--44","Female","No Education",5
+"Chile",2025,"40--44","Female","No Education",4.9
+"Costa Rica",2020,"40--44","Female","No Education",3.9
+"Costa Rica",2025,"40--44","Female","No Education",3.5
+"Mexico",2020,"40--44","Female","No Education",152.5
+"Mexico",2025,"40--44","Female","No Education",121.1
+"Brazil",2020,"45--49","Female","No Education",532.9
+"Brazil",2025,"45--49","Female","No Education",469.2
+"Chile",2020,"45--49","Female","No Education",5.9
+"Chile",2025,"45--49","Female","No Education",5.1
+"Costa Rica",2020,"45--49","Female","No Education",4.2
+"Costa Rica",2025,"45--49","Female","No Education",3.9
+"Mexico",2020,"45--49","Female","No Education",162.4
+"Mexico",2025,"45--49","Female","No Education",151.6
+"Brazil",2020,"15--19","Female","Incomplete Primary",190.7
+"Brazil",2025,"15--19","Female","Incomplete Primary",131.5
+"Chile",2020,"15--19","Female","Incomplete Primary",11.7
+"Chile",2025,"15--19","Female","Incomplete Primary",9.9
+"Costa Rica",2020,"15--19","Female","Incomplete Primary",4.6
+"Costa Rica",2025,"15--19","Female","Incomplete Primary",3.7
+"Mexico",2020,"15--19","Female","Incomplete Primary",75
+"Mexico",2025,"15--19","Female","Incomplete Primary",56.2
+"Brazil",2020,"20--24","Female","Incomplete Primary",275.6
+"Brazil",2025,"20--24","Female","Incomplete Primary",190.6
+"Chile",2020,"20--24","Female","Incomplete Primary",10.7
+"Chile",2025,"20--24","Female","Incomplete Primary",11.8
+"Costa Rica",2020,"20--24","Female","Incomplete Primary",6.9
+"Costa Rica",2025,"20--24","Female","Incomplete Primary",5.1
+"Mexico",2020,"20--24","Female","Incomplete Primary",82.1
+"Mexico",2025,"20--24","Female","Incomplete Primary",77.2
+"Brazil",2020,"25--29","Female","Incomplete Primary",371.8
+"Brazil",2025,"25--29","Female","Incomplete Primary",275
+"Chile",2020,"25--29","Female","Incomplete Primary",8.4
+"Chile",2025,"25--29","Female","Incomplete Primary",10.8
+"Costa Rica",2020,"25--29","Female","Incomplete Primary",9.6
+"Costa Rica",2025,"25--29","Female","Incomplete Primary",7.3
+"Mexico",2020,"25--29","Female","Incomplete Primary",108.2
+"Mexico",2025,"25--29","Female","Incomplete Primary",83.9
+"Brazil",2020,"30--34","Female","Incomplete Primary",522.3
+"Brazil",2025,"30--34","Female","Incomplete Primary",370.3
+"Chile",2020,"30--34","Female","Incomplete Primary",9.4
+"Chile",2025,"30--34","Female","Incomplete Primary",8.6
+"Costa Rica",2020,"30--34","Female","Incomplete Primary",13.5
+"Costa Rica",2025,"30--34","Female","Incomplete Primary",9.8
+"Mexico",2020,"30--34","Female","Incomplete Primary",157.2
+"Mexico",2025,"30--34","Female","Incomplete Primary",109.1
+"Brazil",2020,"35--39","Female","Incomplete Primary",741.1
+"Brazil",2025,"35--39","Female","Incomplete Primary",518.4
+"Chile",2020,"35--39","Female","Incomplete Primary",12.5
+"Chile",2025,"35--39","Female","Incomplete Primary",9.5
+"Costa Rica",2020,"35--39","Female","Incomplete Primary",18.6
+"Costa Rica",2025,"35--39","Female","Incomplete Primary",13.6
+"Mexico",2020,"35--39","Female","Incomplete Primary",233.5
+"Mexico",2025,"35--39","Female","Incomplete Primary",156.9
+"Brazil",2020,"40--44","Female","Incomplete Primary",980.8
+"Brazil",2025,"40--44","Female","Incomplete Primary",733.1
+"Chile",2020,"40--44","Female","Incomplete Primary",16.2
+"Chile",2025,"40--44","Female","Incomplete Primary",12.5
+"Costa Rica",2020,"40--44","Female","Incomplete Primary",19.4
+"Costa Rica",2025,"40--44","Female","Incomplete Primary",18.5
+"Mexico",2020,"40--44","Female","Incomplete Primary",298
+"Mexico",2025,"40--44","Female","Incomplete Primary",231.4
+"Brazil",2020,"45--49","Female","Incomplete Primary",1099.2
+"Brazil",2025,"45--49","Female","Incomplete Primary",966.2
+"Chile",2020,"45--49","Female","Incomplete Primary",22.1
+"Chile",2025,"45--49","Female","Incomplete Primary",16.1
+"Costa Rica",2020,"45--49","Female","Incomplete Primary",18.5
+"Costa Rica",2025,"45--49","Female","Incomplete Primary",19.3
+"Mexico",2020,"45--49","Female","Incomplete Primary",320.7
+"Mexico",2025,"45--49","Female","Incomplete Primary",293.5
+"Brazil",2020,"15--19","Female","Primary",2385.1
+"Brazil",2025,"15--19","Female","Primary",2118.3
+"Chile",2020,"15--19","Female","Primary",15
+"Chile",2025,"15--19","Female","Primary",13.8
+"Costa Rica",2020,"15--19","Female","Primary",56.6
+"Costa Rica",2025,"15--19","Female","Primary",52.3
+"Mexico",2020,"15--19","Female","Primary",737.4
+"Mexico",2025,"15--19","Female","Primary",656.9
+"Brazil",2020,"20--24","Female","Primary",1012.6
+"Brazil",2025,"20--24","Female","Primary",701.9
+"Chile",2020,"20--24","Female","Primary",8.9
+"Chile",2025,"20--24","Female","Primary",6.9
+"Costa Rica",2020,"20--24","Female","Primary",33.7
+"Costa Rica",2025,"20--24","Female","Primary",24.8
+"Mexico",2020,"20--24","Female","Primary",432.2
+"Mexico",2025,"20--24","Female","Primary",320.5
+"Brazil",2020,"25--29","Female","Primary",1298.2
+"Brazil",2025,"25--29","Female","Primary",1009
+"Chile",2020,"25--29","Female","Primary",10.6
+"Chile",2025,"25--29","Female","Primary",9.1
+"Costa Rica",2020,"25--29","Female","Primary",44.9
+"Costa Rica",2025,"25--29","Female","Primary",34
+"Mexico",2020,"25--29","Female","Primary",486.2
+"Mexico",2025,"25--29","Female","Primary",430.8
+"Brazil",2020,"30--34","Female","Primary",1811.3
+"Brazil",2025,"30--34","Female","Primary",1292.2
+"Chile",2020,"30--34","Female","Primary",13.6
+"Chile",2025,"30--34","Female","Primary",10.8
+"Costa Rica",2020,"30--34","Female","Primary",56.1
+"Costa Rica",2025,"30--34","Female","Primary",44.9
+"Mexico",2020,"30--34","Female","Primary",558.5
+"Mexico",2025,"30--34","Female","Primary",483.7
+"Brazil",2020,"35--39","Female","Primary",1629.3
+"Brazil",2025,"35--39","Female","Primary",1797
+"Chile",2020,"35--39","Female","Primary",21
+"Chile",2025,"35--39","Female","Primary",13.8
+"Costa Rica",2020,"35--39","Female","Primary",59.5
+"Costa Rica",2025,"35--39","Female","Primary",55.9
+"Mexico",2020,"35--39","Female","Primary",678.3
+"Mexico",2025,"35--39","Female","Primary",554.3
+"Brazil",2020,"40--44","Female","Primary",1683.8
+"Brazil",2025,"40--44","Female","Primary",1611.7
+"Chile",2020,"40--44","Female","Primary",32.3
+"Chile",2025,"40--44","Female","Primary",21
+"Costa Rica",2020,"40--44","Female","Primary",60.8
+"Costa Rica",2025,"40--44","Female","Primary",59.2
+"Mexico",2020,"40--44","Female","Primary",760
+"Mexico",2025,"40--44","Female","Primary",670.8
+"Brazil",2020,"45--49","Female","Primary",1661.3
+"Brazil",2025,"45--49","Female","Primary",1658.8
+"Chile",2020,"45--49","Female","Primary",44
+"Chile",2025,"45--49","Female","Primary",32.1
+"Costa Rica",2020,"45--49","Female","Primary",63.4
+"Costa Rica",2025,"45--49","Female","Primary",60.4
+"Mexico",2020,"45--49","Female","Primary",761.5
+"Mexico",2025,"45--49","Female","Primary",747.9
+"Brazil",2020,"15--19","Female","Lower Secondary",3741.9
+"Brazil",2025,"15--19","Female","Lower Secondary",3615.7
+"Chile",2020,"15--19","Female","Lower Secondary",394.5
+"Chile",2025,"15--19","Female","Lower Secondary",373.6
+"Costa Rica",2020,"15--19","Female","Lower Secondary",69.8
+"Costa Rica",2025,"15--19","Female","Lower Secondary",71.3
+"Mexico",2020,"15--19","Female","Lower Secondary",3367
+"Mexico",2025,"15--19","Female","Lower Secondary",3348.8
+"Brazil",2020,"20--24","Female","Lower Secondary",2097.6
+"Brazil",2025,"20--24","Female","Lower Secondary",1903.8
+"Chile",2020,"20--24","Female","Lower Secondary",72.2
+"Chile",2025,"20--24","Female","Lower Secondary",51.4
+"Costa Rica",2020,"20--24","Female","Lower Secondary",26.1
+"Costa Rica",2025,"20--24","Female","Lower Secondary",23.5
+"Mexico",2020,"20--24","Female","Lower Secondary",1526.3
+"Mexico",2025,"20--24","Female","Lower Secondary",1390.6
+"Brazil",2020,"25--29","Female","Lower Secondary",1307.9
+"Brazil",2025,"25--29","Female","Lower Secondary",1156.9
+"Chile",2020,"25--29","Female","Lower Secondary",78.8
+"Chile",2025,"25--29","Female","Lower Secondary",55.3
+"Costa Rica",2020,"25--29","Female","Lower Secondary",22.8
+"Costa Rica",2025,"25--29","Female","Lower Secondary",20.6
+"Mexico",2020,"25--29","Female","Lower Secondary",1628.9
+"Mexico",2025,"25--29","Female","Lower Secondary",1486.1
+"Brazil",2020,"30--34","Female","Lower Secondary",1451
+"Brazil",2025,"30--34","Female","Lower Secondary",1301.8
+"Chile",2020,"30--34","Female","Lower Secondary",89.6
+"Chile",2025,"30--34","Female","Lower Secondary",79.2
+"Costa Rica",2020,"30--34","Female","Lower Secondary",23.9
+"Costa Rica",2025,"30--34","Female","Lower Secondary",22.8
+"Mexico",2020,"30--34","Female","Lower Secondary",1597.4
+"Mexico",2025,"30--34","Female","Lower Secondary",1608
+"Brazil",2020,"35--39","Female","Lower Secondary",1679
+"Brazil",2025,"35--39","Female","Lower Secondary",1439.5
+"Chile",2020,"35--39","Female","Lower Secondary",96.3
+"Chile",2025,"35--39","Female","Lower Secondary",89.7
+"Costa Rica",2020,"35--39","Female","Lower Secondary",21.7
+"Costa Rica",2025,"35--39","Female","Lower Secondary",23.9
+"Mexico",2020,"35--39","Female","Lower Secondary",1565.4
+"Mexico",2025,"35--39","Female","Lower Secondary",1576.4
+"Brazil",2020,"40--44","Female","Lower Secondary",1371
+"Brazil",2025,"40--44","Female","Lower Secondary",1660.7
+"Chile",2020,"40--44","Female","Lower Secondary",115.3
+"Chile",2025,"40--44","Female","Lower Secondary",96.1
+"Costa Rica",2020,"40--44","Female","Lower Secondary",17.5
+"Costa Rica",2025,"40--44","Female","Lower Secondary",21.7
+"Mexico",2020,"40--44","Female","Lower Secondary",1506.2
+"Mexico",2025,"40--44","Female","Lower Secondary",1542.6
+"Brazil",2020,"45--49","Female","Lower Secondary",1189.3
+"Brazil",2025,"45--49","Female","Lower Secondary",1350.6
+"Chile",2020,"45--49","Female","Lower Secondary",137.8
+"Chile",2025,"45--49","Female","Lower Secondary",114.4
+"Costa Rica",2020,"45--49","Female","Lower Secondary",15
+"Costa Rica",2025,"45--49","Female","Lower Secondary",17.4
+"Mexico",2020,"45--49","Female","Lower Secondary",1352.4
+"Mexico",2025,"45--49","Female","Lower Secondary",1478.3
+"Brazil",2020,"15--19","Female","Upper Secondary",1481.4
+"Brazil",2025,"15--19","Female","Upper Secondary",1489.9
+"Chile",2020,"15--19","Female","Upper Secondary",193.4
+"Chile",2025,"15--19","Female","Upper Secondary",187.8
+"Costa Rica",2020,"15--19","Female","Upper Secondary",50.7
+"Costa Rica",2025,"15--19","Female","Upper Secondary",53.4
+"Mexico",2020,"15--19","Female","Upper Secondary",1171.9
+"Mexico",2025,"15--19","Female","Upper Secondary",1248.9
+"Brazil",2020,"20--24","Female","Upper Secondary",4341.7
+"Brazil",2025,"20--24","Female","Upper Secondary",4427
+"Chile",2020,"20--24","Female","Upper Secondary",435.6
+"Chile",2025,"20--24","Female","Upper Secondary",374.2
+"Costa Rica",2020,"20--24","Female","Upper Secondary",80.8
+"Costa Rica",2025,"20--24","Female","Upper Secondary",81.3
+"Mexico",2020,"20--24","Female","Upper Secondary",2482.8
+"Mexico",2025,"20--24","Female","Upper Secondary",2707.9
+"Brazil",2020,"25--29","Female","Upper Secondary",3999.4
+"Brazil",2025,"25--29","Female","Upper Secondary",4389.9
+"Chile",2020,"25--29","Female","Upper Secondary",328.2
+"Chile",2025,"25--29","Female","Upper Secondary",291.5
+"Costa Rica",2020,"25--29","Female","Upper Secondary",59.8
+"Costa Rica",2025,"25--29","Female","Upper Secondary",61
+"Mexico",2020,"25--29","Female","Upper Secondary",1600.3
+"Mexico",2025,"25--29","Female","Upper Secondary",1735.7
+"Brazil",2020,"30--34","Female","Upper Secondary",3301.1
+"Brazil",2025,"30--34","Female","Upper Secondary",3591.1
+"Chile",2020,"30--34","Female","Upper Secondary",314.1
+"Chile",2025,"30--34","Female","Upper Secondary",320.9
+"Costa Rica",2020,"30--34","Female","Upper Secondary",51.3
+"Costa Rica",2025,"30--34","Female","Upper Secondary",57.2
+"Mexico",2020,"30--34","Female","Upper Secondary",1315
+"Mexico",2025,"30--34","Female","Upper Secondary",1471.3
+"Brazil",2020,"35--39","Female","Upper Secondary",3101.5
+"Brazil",2025,"35--39","Female","Upper Secondary",3284
+"Chile",2020,"35--39","Female","Upper Secondary",291.3
+"Chile",2025,"35--39","Female","Upper Secondary",314
+"Costa Rica",2020,"35--39","Female","Upper Secondary",41.8
+"Costa Rica",2025,"35--39","Female","Upper Secondary",51.4
+"Mexico",2020,"35--39","Female","Upper Secondary",1036.2
+"Mexico",2025,"35--39","Female","Upper Secondary",1306
+"Brazil",2020,"40--44","Female","Upper Secondary",2516.2
+"Brazil",2025,"40--44","Female","Upper Secondary",3079.1
+"Chile",2020,"40--44","Female","Upper Secondary",273.4
+"Chile",2025,"40--44","Female","Upper Secondary",290.6
+"Costa Rica",2020,"40--44","Female","Upper Secondary",29.6
+"Costa Rica",2025,"40--44","Female","Upper Secondary",41.8
+"Mexico",2020,"40--44","Female","Upper Secondary",856.7
+"Mexico",2025,"40--44","Female","Upper Secondary",1027
+"Brazil",2020,"45--49","Female","Upper Secondary",1898.9
+"Brazil",2025,"45--49","Female","Upper Secondary",2491.1
+"Chile",2020,"45--49","Female","Upper Secondary",258.2
+"Chile",2025,"45--49","Female","Upper Secondary",272
+"Costa Rica",2020,"45--49","Female","Upper Secondary",23.5
+"Costa Rica",2025,"45--49","Female","Upper Secondary",29.5
+"Mexico",2020,"45--49","Female","Upper Secondary",754.8
+"Mexico",2025,"45--49","Female","Upper Secondary",845.8
+"Brazil",2020,"15--19","Female","Post Secondary",21.8
+"Brazil",2025,"15--19","Female","Post Secondary",23
+"Chile",2020,"15--19","Female","Post Secondary",0.7
+"Chile",2025,"15--19","Female","Post Secondary",0.7
+"Costa Rica",2020,"15--19","Female","Post Secondary",1.6
+"Costa Rica",2025,"15--19","Female","Post Secondary",1.7
+"Mexico",2020,"15--19","Female","Post Secondary",10
+"Mexico",2025,"15--19","Female","Post Secondary",11
+"Brazil",2020,"20--24","Female","Post Secondary",535
+"Brazil",2025,"20--24","Female","Post Secondary",575.8
+"Chile",2020,"20--24","Female","Post Secondary",191.9
+"Chile",2025,"20--24","Female","Post Secondary",172.3
+"Costa Rica",2020,"20--24","Female","Post Secondary",48.6
+"Costa Rica",2025,"20--24","Female","Post Secondary",49.5
+"Mexico",2020,"20--24","Female","Post Secondary",725.8
+"Mexico",2025,"20--24","Female","Post Secondary",809.6
+"Brazil",2020,"25--29","Female","Post Secondary",1197.5
+"Brazil",2025,"25--29","Female","Post Secondary",1401.9
+"Chile",2020,"25--29","Female","Post Secondary",369.2
+"Chile",2025,"25--29","Female","Post Secondary",352.1
+"Costa Rica",2020,"25--29","Female","Post Secondary",68
+"Costa Rica",2025,"25--29","Female","Post Secondary",73.6
+"Mexico",2020,"25--29","Female","Post Secondary",1298.8
+"Mexico",2025,"25--29","Female","Post Secondary",1449.9
+"Brazil",2020,"30--34","Female","Post Secondary",1348.9
+"Brazil",2025,"30--34","Female","Post Secondary",1583
+"Chile",2020,"30--34","Female","Post Secondary",339.9
+"Chile",2025,"30--34","Female","Post Secondary",374.8
+"Costa Rica",2020,"30--34","Female","Post Secondary",63.2
+"Costa Rica",2025,"30--34","Female","Post Secondary",70.6
+"Mexico",2020,"30--34","Female","Post Secondary",1198.6
+"Mexico",2025,"30--34","Female","Post Secondary",1393.8
+"Brazil",2020,"35--39","Female","Post Secondary",1178.1
+"Brazil",2025,"35--39","Female","Post Secondary",1345.5
+"Chile",2020,"35--39","Female","Post Secondary",278
+"Chile",2025,"35--39","Female","Post Secondary",338.3
+"Costa Rica",2020,"35--39","Female","Post Secondary",50.8
+"Costa Rica",2025,"35--39","Female","Post Secondary",63
+"Mexico",2020,"35--39","Female","Post Secondary",1034.8
+"Mexico",2025,"35--39","Female","Post Secondary",1181.4
+"Brazil",2020,"40--44","Female","Post Secondary",897.4
+"Brazil",2025,"40--44","Female","Post Secondary",1172.8
+"Chile",2020,"40--44","Female","Post Secondary",222.2
+"Chile",2025,"40--44","Female","Post Secondary",276.7
+"Costa Rica",2020,"40--44","Female","Post Secondary",42.6
+"Costa Rica",2025,"40--44","Female","Post Secondary",50.7
+"Mexico",2020,"40--44","Female","Post Secondary",844.7
+"Mexico",2025,"40--44","Female","Post Secondary",1018.6
+"Brazil",2020,"45--49","Female","Post Secondary",726.7
+"Brazil",2025,"45--49","Female","Post Secondary",891.3
+"Chile",2020,"45--49","Female","Post Secondary",172.8
+"Chile",2025,"45--49","Female","Post Secondary",221
+"Costa Rica",2020,"45--49","Female","Post Secondary",32.6
+"Costa Rica",2025,"45--49","Female","Post Secondary",42.5
+"Mexico",2020,"45--49","Female","Post Secondary",703.6
+"Mexico",2025,"45--49","Female","Post Secondary",829
