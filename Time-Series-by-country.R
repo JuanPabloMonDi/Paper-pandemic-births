@@ -477,8 +477,9 @@ grid10<-grid.arrange(grid9,legend,ncol=1, heights=c(10,1))
 
 
 
-#Save images
+### Save images------------------------------------
 
+# Save in png
 ggsave("CostaRica.png", grid2, width = 16, height = 12, units = "in", bg = "white")
 ggsave("Brazil.png", grid4, width = 16, height = 12, units = "in", bg = "white")
 ggsave("Mexico.png", grid8, width = 16, height = 12, units = "in", bg = "white")
@@ -490,7 +491,16 @@ ggsave("Mexico2.png", grid8, width = 12, height = 10, units = "in", bg = "white"
 ggsave("Chile2.png", grid10, width = 12, height = 10, units = "in", bg = "white")
 
 
-
+#Save in EPS format
+ggsave("CostaRica2.eps", grid2, width = 12, height = 10, units = "in", bg = "white",device="eps")
+ggsave("Brazil2.eps", grid4, width = 12, height = 10, units = "in", bg = "white",device="eps")
+ggsave("Mexico2.eps", grid8, width = 12, height = 10, units = "in", bg = "white",device="eps")
+ggsave("Chile2.eps", grid10, width = 12, height = 10, units = "in", bg = "white",device="eps")
+#Save in pdf
+ggsave("CostaRica2.pdf", grid2, width = 12, height = 10, units = "in", bg = "white",device="pdf")
+ggsave("Brazil2.pdf", grid4, width = 12, height = 10, units = "in", bg = "white",device="pdf")
+ggsave("Mexico2.pdf", grid8, width = 12, height = 10, units = "in", bg = "white",device="pdf")
+ggsave("Chile2.pdf", grid10, width = 12, height = 10, units = "in", bg = "white",device="pdf")
 
 
 

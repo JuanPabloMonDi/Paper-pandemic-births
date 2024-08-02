@@ -1,6 +1,5 @@
 # Paper-pandemic-births
- R scripts used on the paper "The Impact of the COVID-19 pandemic on birth counts in selected Latin American Countries"
-
+ R scripts used on the paper "Exacerbated fertility inequalities due to COVID-19 pandemic in selected Latin American Countries"
 
 This repository has the following files:
  - Data folder: data used for the calculations on this paper; The file Variation_of_births.csv show the percentual variation of births by month. (A more detailed explanation is founded on the methodology section of the study). The file wcde_data.csv has the TFR projections for each country given by the Wittgenstein Centre. 
