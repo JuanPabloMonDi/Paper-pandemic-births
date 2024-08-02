@@ -267,7 +267,8 @@ datainfo$Accuracy<-datainfo$columns%>%lapply(AccTimeSeries,data=data)
 datainfo[c("ME","RMSE","MAE","MPE","MAPE","MASE","ACF1")]<-do.call(rbind,datainfo$Accuracy)
 datainfo[1:4]<-lapply(datainfo[1:4],as.character)
 datainfo<-select(datainfo,-c("Accuracy"))
-datainfo<-datainfo2
+
+#save the accuracy measures
 writexl::write_xlsx(datainfo,"data/Accuracy.xlsx")
 
 

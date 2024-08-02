@@ -167,7 +167,7 @@ TFRWithPandemicMean$WithEffectMean<-TFRWithPandemicMean$WithEffectMean*5
 TFR<-merge(TFRProjected,TFRWithPandemic,by=c("Area","Years_Study"))
 TFR<-merge(TFR,TFRWithPandemicMean,by=c("Area","Years_Study"))
 TFR<-TFR%>% arrange(Area,desc(Years_Study))
-write_xlsx(TFR,"TFR.xlsx")
+write_xlsx(TFR,"data/TFR.xlsx")
 
 #Now, lets plot this variations to have a different view of the data
 
